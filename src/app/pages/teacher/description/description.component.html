@@ -1,0 +1,16 @@
+<div class="container mt-4">
+    <h3>About you</h3>
+    <form #teacherForm="ngForm" (ngSubmit)="onSubmit(teacherForm)">
+      <!-- Other form fields -->
+  
+      <!-- Teacher's Description -->
+      <div class="mb-3">
+        <label for="teacherDescription" class="form-label">Upto 200 words</label>
+        <textarea class="form-control" id="teacherDescription" name="teacherDescription" rows="10" ngModel></textarea>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary" [disabled]="!teacherForm.valid">Submit</button>
+    </form>
+  </div>
+  

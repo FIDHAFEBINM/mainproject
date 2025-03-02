@@ -1,0 +1,51 @@
+<!-- <div class="containe-fluid  bg-light" style="height: 40vh;">
+    <div class="container pt-5" >
+    <h4 class="fw-bold text-secondary" style="font-family: 'Times New Roman', Times, serif;">Explore Elearn</h4>
+    <div class="row">
+        <div class="col-4 mt-3" *ngFor="let item of list">
+            <div class="card d-flex flex-row gap-3" (click)="gocourse()" >
+                <img class="card-img-left" [src]="item.image" alt="card image" style="width: 60px;">
+                <div class="card-body">
+                    <div class="card-text">{{item.category}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div> -->
+
+<div class="container-fluid bg-light" style="height: 40vh;">
+    <div class="container pt-5">
+      <h4 class="fw-bold text-secondary" style="font-family: 'Times New Roman', Times, serif;">Explore Elearn</h4>
+  
+      <!-- Carousel Wrapper -->
+      <div id="courseCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <!-- Group items into carousel-item slides -->
+          <div *ngFor="let group of groupedList; let i = index" class="carousel-item" [ngClass]="{ 'active': i === 0 }">
+            <div class="row">
+              <div class="col-4 mt-3" *ngFor="let item of group">
+                <div class="card d-flex flex-row gap-3" (click)="gocourse()">
+                  <img class="card-img-left" [src]="item.image" alt="card image" style="width: 60px;">
+                  <div class="card-body">
+                    <div class="card-text">{{ item.category }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#courseCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#courseCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  

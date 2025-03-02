@@ -1,0 +1,30 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Category Management</h2>
+  
+    <!-- Add Category -->
+    <div class="mb-3">
+      <input type="text" class="form-control" [(ngModel)]="newCategory" placeholder="Enter new category">
+      <button class="btn btn-primary mt-2" (click)="addCategory()">Add Category</button>
+    </div>
+  
+    <!-- Add Subcategory -->
+    <div class="mb-3">
+      <select class="form-select" [(ngModel)]="selectedCategory">
+        <option value="" disabled selected>Select Category</option>
+        <option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</option>
+      </select>
+      <input type="text" class="form-control mt-2" [(ngModel)]="newSubcategory" placeholder="Enter new subcategory">
+      <button class="btn btn-success mt-2" (click)="addSubcategory()">Add Subcategory</button>
+    </div>
+  
+    <!-- Display Categories & Subcategories -->
+    <div class="card mt-4" *ngFor="let category of categories">
+      <div class="card-body">
+        <h5 class="card-title">{{ category.name }}</h5>
+        <ul>
+          <li *ngFor="let sub of category.subcategories">{{ sub }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

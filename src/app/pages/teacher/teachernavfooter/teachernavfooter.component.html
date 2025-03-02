@@ -1,0 +1,48 @@
+<nav class="navbar">
+    <div class="logo">
+      <span>ELearn</span>
+     </div>
+     
+     <div class="menu dropdown ">
+      <a class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        Explore
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" data-bs-auto-close="outside">
+        
+        <!-- First-level dropdown -->
+        <li class="dropdown dropend">
+          <a class="dropdown-item dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" href="#">
+            HTML
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a href="#" class="dropdown-item">Normal 1</a></li>
+            <li><a href="#" class="dropdown-item">Normal 2</a></li>
+            <li><a href="#" class="dropdown-item">Normal 3</a></li>
+          </ul>
+        </li>
+    
+        <li><a class="dropdown-item" href="#">CSS</a></li>
+        <li><a class="dropdown-item" href="#">JavaScript</a></li>
+      </ul>
+    </div>
+    
+    <div class="search-bar">
+      <input type="text" placeholder="Search for anything" />
+      <button>
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+    <div class="menu explore" >
+      <a href="#" [routerLink]="['courses']" routerLinkActive="router-link-active" >Course</a>
+    </div>
+    <!-- <div>
+      <span><i class="fa fa-cart-plus" ></i></span>
+    </div> -->
+    <div class="actions">
+      <button class="login"  (click)="logout()">Log out</button>
+      <div ><img src="/image/doc.jpg" alt="" width="50px" height="50px" style="border-radius: 50%;" (click)="profile()" ></div>
+     
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+ 

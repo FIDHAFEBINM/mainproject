@@ -1,0 +1,67 @@
+<!-- <div class="container">
+    <div>
+        <video width="100%" height="400vh" controls>
+            <source src="https://youtu.be/NtJdAssk-ys?si=Y83q3W7R6PRCjLmu" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div> -->
+
+<div class="container-fluid">
+  <div class="sub1" style="width:25%">
+    <div class="container pt-5" >
+  <div class="list-group">
+    <!-- Loop through each section (e.g., weeks) -->
+    <div *ngFor="let week of courseOutline">
+      <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="collapse" [attr.data-bs-target]="'#' + week.id">
+        {{ week.title }}
+      </a>
+      <div [id]="week.id" class="collapse">
+        <!-- Loop through each item in the week -->
+        <a *ngFor="let item of week.items" href="#" class="list-group-item list-group-item-action ps-4">
+          {{ item }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+  </div>
+  <div class="sub2" style="width:70%">
+<div class="container mt-3">
+    <div>
+        <iframe width="100%" height="500" 
+            src="https://www.youtube.com/embed/NtJdAssk-ys" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+<div class="transcript-container container">
+    <!-- <div class="transcript-header">
+      <label for="transcript-language">Language for Video Transcript:</label>
+      <select id="transcript-language" [(ngModel)]="selectedLanguage">
+        <option *ngFor="let lang of languages" [value]="lang">{{ lang }}</option>
+      </select>
+      <button (click)="toggleTranscript()">{{ showTranscript ? 'Hide' : 'Show' }}</button>
+    </div> -->
+  
+    <div *ngIf="showTranscript" class="transcript-content">
+      <textarea
+        id="transcript-text"
+        [value]="transcript"
+        readonly
+        class="transcript-textarea"
+      ></textarea>
+      <!-- <label>
+        <input type="checkbox" [(ngModel)]="autoScroll" />
+        Auto Scroll
+      </label> -->
+    </div>
+  </div>
+  
+<!-- <app-review></app-review> -->
+</div>
+</div>

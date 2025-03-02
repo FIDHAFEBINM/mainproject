@@ -1,0 +1,34 @@
+<div class="container">
+    <h2 class="text-center">Assignment Submission</h2>
+  
+    <!-- Assignment Question -->
+    <div class="assignment-box">
+      <h4>Assignment Question</h4>
+      <p>{{ assignmentQuestion }}</p>
+    </div>
+  
+    <!-- Upload Form -->
+    <form [formGroup]="assignmentForm" (ngSubmit)="submitAssignment()">
+      <div class="form-group">
+        <label for="fileUpload"><strong>Upload Your Answer (PDF Only)</strong></label>
+        <input type="file" id="fileUpload" class="form-control" (change)="onFileChange($event)" accept="application/pdf" />
+      </div>
+  
+      <!-- PDF Preview (Only Shows First Page) -->
+      <div *ngIf="fileURL" class="pdf-preview-container mt-3">
+        <p><strong>Preview:</strong></p>
+        <iframe [src]="fileURL" class="pdf-preview"></iframe>
+  
+        <!-- Open and Download Buttons -->
+        <div class="btn-group mt-2">
+          <a [href]="fileURL" target="_blank" class="btn btn-success">Open</a>
+          <button type="button" class="btn btn-info" (click)="downloadAssignment()">Download</button>
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary mt-3" [disabled]="!assignmentForm.valid">
+        Submit Assignment
+      </button>
+    </form>
+  </div>
+  

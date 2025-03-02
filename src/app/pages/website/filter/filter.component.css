@@ -1,0 +1,51 @@
+.filter-container {
+    font-family: Arial, sans-serif;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    max-width: 300px;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .filter-category {
+    margin-bottom: 1.5rem;
+  }
+  
+  h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  .a:hover {
+    text-decoration: underline;
+  }
+  
+  .info-icon {
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  .description {
+    font-size: 0.8rem;
+    color: #666;
+  }
+  

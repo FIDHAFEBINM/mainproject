@@ -1,0 +1,86 @@
+<!-- <div class="container p-4 ">
+    <h3 class="fs-3 ">Skill Up Today</h3>
+    <div class="d-flex gap-5 fs-5 mt-3 ">
+        <a href="#" class=" text-secondary courses">Design</a>
+        <a href="#" class=" text-secondary courses">Data Science</a>
+        <a href="#" class=" text-secondary courses">Buisiness</a>
+        <a href="#" class=" text-secondary courses">Health Science</a>
+      </div>
+
+     
+</div> -->
+
+<div class="container-fluid">
+<div class="container full pt-4">
+
+<div id="cardCarousel" class="carousel slide" data-bs-ride="carousel">
+  
+  <!-- Carousel Indicators -->
+  <div class="carousel-indicators">
+    <button *ngFor="let cardSet of groupedCards; let i = index"
+      type="button" data-bs-target="#cardCarousel"
+      [attr.data-bs-slide-to]="i"
+      [class.active]="i === 0">
+    </button>
+  </div>
+
+  <!-- Carousel Inner -->
+  <div class="carousel-inner">
+    <div *ngFor="let cardSet of groupedCards; let i = index" class="carousel-item" [class.active]="i === 0">
+      <!-- <div class="row">
+        
+        <div class="col-md-3" *ngFor="let card of cardSet" (click)="goToSelected()">
+          <div class="card">
+            <img [src]="card.image" class="card-img-top" style="height: 180px;" [alt]="card.title">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ card.title }}</h5>
+              <p class="card-text">{{ card.description }}</p>
+              <p class="card-text fw-bold">${{ card.price}}</p>
+
+              <a href="#" class="btn btn-primary">Learn More</a>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="card-grid">
+          <div class="card-item" *ngFor="let card of cardSet" (click)="goToSelected()">
+            <div class="custom-card card">
+              <img [src]="card.image" class="card-img-top" [alt]="card.title" />
+              <div class="card-body text-center">
+                <h5 class="card-title">{{ card.title }}</h5>
+                <p class="card-text">{{ card.description }}</p>
+                <p class="card-text fw-bold">{{ card.price | currency:'INR'  }}</p>
+    
+                <!-- Display stars for rating -->
+                <div class="star-rating">
+                  <ng-container *ngFor="let filled of getStarArray(card.rating)">
+                    <i class="star" [class.filled]="filled">★</i>
+                  </ng-container>
+                  <span class="rating-value">({{ card.rating }})</span>
+                </div>
+    
+                <p class="card-text">   <i class="fa fa-users"></i>{{ card.learners }} learners enrolled </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Carousel Controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+
+</div>
+</div>
+<div class="container">
+  <button class="btn btn-outline-primary mt-3 mx-5" (click)="ongo()" >More Courses</button>
+
+</div> 
+
+</div>
+

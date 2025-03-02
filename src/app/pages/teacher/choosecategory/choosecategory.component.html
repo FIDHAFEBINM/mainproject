@@ -1,0 +1,83 @@
+<div class="main">
+
+<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+    <div class="sub">
+        <div>
+        <button type="submit" [disabled]="!categoryForm.valid">Save</button>
+        </div>
+        <label for="category">Category</label>
+        <select id="category" formControlName="category">
+            <option value="">Select Category</option>
+            <option *ngFor="let category of categories" [value]="category">
+                {{ category }}
+            </option>
+        </select>
+        <div *ngIf="categoryForm.get('category')?.touched && categoryForm.get('category')?.invalid" class="sub">
+            Category is required.
+        </div>
+    </div>
+
+    <div>
+        <label for="subcategory">Subcategory</label>
+        <select id="subcategory" formControlName="subcategory">
+            <option value="">Select Subcategory</option>
+            <option *ngFor="let subcategory of subcategories" [value]="subcategory">
+                {{ subcategory }}
+            </option>
+        </select>
+        <div *ngIf="categoryForm.get('subcategory')?.touched && categoryForm.get('subcategory')?.invalid" class="sub">
+            Subcategory is required.
+        </div>
+    </div>
+
+    <div class="sub">
+        <label for="topic">Topic</label>
+        <input type="text" id="topic" formControlName="topic" placeholder="add title">
+        <div *ngIf="categoryForm.get('topic')?.touched && categoryForm.get('topic')?.invalid" class="sub">
+            Topic is required.
+        </div>
+    </div>
+
+
+    <div class="sub">
+        <label for="about">About</label>
+        <textarea  rows="3" id="about" formControlName="about" placeholder="Write your review..."></textarea>
+        <div *ngIf="categoryForm.get('about')?.touched && categoryForm.get('about')?.invalid" class="sub">
+            About is required.
+        </div>
+    </div>
+
+    <div class="sub">
+        <label for="video">Video</label>
+        <input type="file" id="video" formControlName="video" placeholder="add video" class="form-control"  (change)="onFileChange($event)"
+        accept="video/*" required >
+        <div *ngIf="categoryForm.get('video')?.touched && categoryForm.get('video')?.invalid" class="sub">
+            video is required.
+        </div>
+    
+    </div>
+    <!-- <div class="sub">
+        <label for="videoFile">Select Video:</label>
+        <input type="file" id="videoFile" name="videoFile" (change)="onFileChange($event)"
+            accept="video/*" required />
+    </div> -->
+    <!-- <div>
+        <video width="100%" height="400vh" controls>
+            <source [src]='video' type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div> -->
+
+    <div class="sub">
+        <label for="sectionImage" class="form-label">Preview Picture</label>
+        <input type="file" class="form-control" id="sectionImage" name="sectionImage" formControlName="sectionImage" (change)="onImageChange($event)" accept="image/*">
+        <div *ngIf="imagePreview" class="mt-2">
+          <img [src]="imagePreview" alt="Section Picture" class="img-fluid" style="max-width: 200px;">
+        </div>
+      </div>
+
+</form>
+
+
+
+</div>

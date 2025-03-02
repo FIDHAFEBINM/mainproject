@@ -1,0 +1,68 @@
+.fs-3{
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+.courses{
+    text-decoration: none;
+}
+.courses:hover{
+    text-decoration: underline;
+    text-decoration-thickness: 2px; 
+    text-decoration-color: rgba(85, 85, 85, 0.89);
+    color: black;
+   
+}
+.container-fluid{
+    /* background-color: rgba(240, 250, 255, 0.823); */
+    height: 65vh;
+}
+.carousel-inner{
+    max-height: 60vh;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(250px, 1fr)); /* Responsive layout */
+    gap: 5px; /* Adds space between grid items */
+  }
+  
+  .card-item {
+    cursor: pointer;
+  }
+  
+  .custom-card {
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .custom-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .custom-card img {
+    height: 180px;
+    object-fit: cover;
+  }
+  
+  .star-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin: 5px 0;
+  }
+  
+  .star {
+    font-size: 18px;
+    color: #ccc;
+  }
+  
+  .star.filled {
+    color: #ffcc00; /* Gold for filled stars */
+  }
+  
+  .rating-value {
+    font-size: 14px;
+    color: #333;
+    margin-left: 5px;
+  }
+  

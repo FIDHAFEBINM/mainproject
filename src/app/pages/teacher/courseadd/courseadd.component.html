@@ -1,0 +1,24 @@
+<div class="main">
+   <div class="sub">
+    <nav>
+        <ul>
+            <div class="arrow" (click)="hideAllExcept('addcourse')" ><li><a routerLink="/development"   >Add Course</a></li></div>
+            <div class="arrow" (click)="hideAllExcept('addsection')"><li><a routerLink="/development" >Add Section</a></li></div>
+            <div class="arrow" (click)="hideAllExcept('pricing')"><li><a routerLink="/development">Pricing</a></li></div>
+            <div class="arrow" (click)="hideAllExcept('viewing')"><li><a routerLink="/development">View Course</a></li></div>
+
+
+        </ul>
+      </nav>
+      
+    </div>
+    <div>
+        <app-choosecategory [hidden]="!addcourse"></app-choosecategory>
+        <app-addsection [hidden]="!addsection"></app-addsection>
+        <app-pricing [hidden]="!pricing"></app-pricing>
+        <app-viewcourse [hidden]="!viewing"></app-viewcourse>
+
+    </div>
+</div>
+
+<!-- [ngClass]="{ 'arrows': addcourse }" -->

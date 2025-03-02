@@ -1,0 +1,45 @@
+<div class="question-paper-container">
+    <div class="question-paper">
+  
+      <!-- Timer Section -->
+      <div class="timer-box">
+        Time Left: <span class="timer">{{ minutes }}:{{ seconds | number: '2.0' }}</span>
+      </div>
+  
+      <!-- Question List -->
+      <div *ngFor="let question of questions; let i = index" class="question-block">
+        <div class="question-header">
+          <span class="question-number">{{ i + 1 }}.</span>
+          <span class="question-text">{{ question.text }}</span>
+          <span class="marks">({{ question.marks }} Marks)</span> <!-- Display Marks -->
+        </div>
+        <div class="options-group">
+          <div *ngFor="let option of question.options" class="option-item">
+            <input
+              type="radio"
+              name="question{{ i }}"
+              [value]="option"
+              [(ngModel)]="answers[i]"
+              [disabled]="isSubmitted"
+              id="option{{ i }}-{{ option }}"
+            />
+            <label for="option{{ i }}-{{ option }}"
+              [ngClass]="{
+                'correct': isSubmitted && option === question.correct,
+                'incorrect': isSubmitted && option !== question.correct && answers[i] === option
+              }"
+              >{{ option }}</label>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <button class="submit-button" (click)="submit()">Submit</button>
+  
+      <!-- Marks Display -->
+      <div *ngIf="totalMarks !== null" class="marks-display">
+        <h3>Your Total Marks: {{ totalMarks }} / {{ totalPossibleMarks }}</h3>
+      </div>
+    </div>
+  </div>
+  

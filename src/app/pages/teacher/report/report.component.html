@@ -1,0 +1,79 @@
+<!-- <div class="container" style="padding-top: 30px;">
+    <h3 class="headings">Course Overview</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Subject Title</th>
+          <th>Number of Learners</th>
+          <th>Rating</th>
+          <th>Reviews</th>
+          <th>Cash Generated</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of courses">
+          <td>{{ course.title }}</td>
+          <td>{{ course.learners }}</td>
+          <td>
+            <div class="rating">
+              <span *ngFor="let star of [].constructor(course.rating); let i = index" class="star">★</span>
+              <span *ngFor="let star of [].constructor(5 - course.rating); let i = index" class="star">☆</span>
+            </div>
+          </td>
+          <td>{{ course.reviews }} reviews</td>
+          <td>{{ course.cashGenerated  | currency:'INR'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+   -->
+
+
+
+   <div class="container" style="padding-top: 30px;">
+    <h3 class="headings">Course Overview</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Subject Title</th>
+          <th>Month</th>
+          <th>Number of Learners</th>
+          <th>Rating</th>
+          <th>Reviews</th>
+          <th>Cash Generated</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let course of courses">
+          <ng-container *ngFor="let monthData of course.months">
+            <tr>
+              <!-- Show the title only for the first month -->
+              <td *ngIf="monthData === course.months[0]">{{ course.title }}</td>
+              <td *ngIf="monthData !== course.months[0]"></td> <!-- Empty cell for other months -->
+  
+              <!-- Month Name -->
+              <td>{{ monthData.month }}</td>
+  
+              <!-- Number of Learners -->
+              <td>{{ monthData.learners }}</td>
+  
+              <!-- Rating -->
+              <td>
+                <div class="rating">
+                  <span *ngFor="let star of [].constructor(monthData.rating); let i = index" class="star">★</span>
+                  <span *ngFor="let star of [].constructor(5 - monthData.rating); let i = index" class="star">☆</span>
+                </div>
+              </td>
+  
+              <!-- Reviews -->
+              <td>{{ monthData.reviews }} reviews</td>
+  
+              <!-- Cash Generated -->
+              <td>{{ monthData.cashGenerated | currency: 'INR' }}</td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  

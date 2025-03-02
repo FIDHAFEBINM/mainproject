@@ -1,0 +1,60 @@
+.card-img-left {
+    object-fit: cover;
+    height:100%;/* Adjust the height of the image */
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .pagination {
+    padding: 10px;
+  }
+  
+  .pagination .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+    color:white;     
+  }
+  
+  .pagination .page-link {
+    color: #007bff;
+  }
+
+  
+  .pagination .page-item.disabled .page-link {
+    color: #ddd;
+    cursor: not-allowed;
+  }
+  
+  .rating-stars i {
+    margin-right: 2px;
+  }
+
+  .sub {
+    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .sub button {
+    font-size: 16px;
+    border-radius: 4px;
+  }
+  
+  .container {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .container .filter-section {
+    display: block;
+  }
+  
+  .container .filter-section[hidden] {
+    display: none;
+  }
+  
+  

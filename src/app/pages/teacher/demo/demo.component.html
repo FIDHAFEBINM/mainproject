@@ -1,0 +1,40 @@
+<div class="main">
+    <div class="column-side">
+        <img src="/image/doc.jpg" alt="" height="150" class="image" width="150px">
+        <p class="names">Fidha Febin</p>
+        <div class="profiles-box">
+            <div class="sub1">
+                <a class="link" (click)="hideAllExcept('view')">Public Profile</a>
+            </div>
+            <div class="sub1">
+                <a class="link" (click)="hideAllExcept('teacher')">Profile</a>
+            </div>
+            <div class="sub1">
+                <a class="link" (click)="hideAllExcept('description')">Profile Description</a>
+            </div>
+            <div class="sub1">
+                <a class="link" (click)="hideAllExcept('account')">Account Details</a>
+            </div>
+            <!-- <div class="sub1">
+                <a class="link">Course details</a>
+            </div> -->
+            <div class="sub1">
+                <a class="link" (click)="hideAllExcept('course')">Course Details</a>
+            </div>
+            <!-- <div class="sub1">
+                <a class="link" (click)="hideAllExcept('report')">Monthly Report</a>
+            </div> -->
+            <div class="sub1">
+                <a class="link" (click)="logout()">Close Account</a>
+            </div>
+        </div>
+    </div>
+    <div class="column-full" >
+        <app-viewprofile [hidden]="!showViewProfile"  ></app-viewprofile>
+        <app-teacherprofile  [hidden]="!showTeacherProfile"></app-teacherprofile>
+        <app-description  [hidden]="!showDescription"></app-description>
+        <app-accoumtdetails [hidden]="!accountdetails"></app-accoumtdetails>
+        <app-report [hidden]="!course"></app-report>
+        <!-- <app-teachermonthlyreport [hidden]="!report"></app-teachermonthlyreport> -->
+    </div>
+</div>

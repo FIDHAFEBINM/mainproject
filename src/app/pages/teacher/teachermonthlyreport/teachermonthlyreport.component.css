@@ -1,0 +1,65 @@
+.report-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  select {
+    margin: 10px 0;
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  .progress-circle {
+    position: relative;
+    width: 200px;
+    margin: 20px auto;
+  }
+  
+  circle {
+    transition: stroke-dasharray 0.5s ease-in-out;
+  }
+  
+  .progress.students {
+    stroke: blue;
+  }
+  
+  .progress.reviews {
+    stroke: green;
+  }
+  
+  .progress.rating {
+    stroke: orange;
+  }
+  
+  .progress.payments {
+    stroke: red;
+  }
+  
+  .legend {
+    margin-top: 10px;
+  }
+  
+  .dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  .students {
+    background: blue;
+  }
+  
+  .reviews {
+    background: green;
+  }
+  
+  .rating {
+    background: orange;
+  }
+  
+  .payments {
+    background: red;
+  }
+  

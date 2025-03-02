@@ -1,0 +1,79 @@
+<!-- <div class="container">
+    <div>
+        <div class="card-grid">
+          <div class="card-item" *ngFor="let card of card1" (click)="gotoselected()" >
+            <div class="custom-card card">
+              <img [src]="card.image" class="card-img-top" [alt]="card.title">
+              <div class="card-body text-center">
+                <h5 class="card-title">{{ card.title }}</h5>
+                <p class="card-text">{{ card.description }}</p>
+                <p class="card-text fw-bold">${{ card.price }}</p>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div class="container">
+    <div>
+      <div class="card-grid">
+        <div class="card-item" *ngFor="let card of card1" (click)="gotoselected()">
+          <div class="custom-card card">
+            <img [src]="card.image" class="card-img-top" [alt]="card.title" />
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ card.title }}</h5>
+              <p class="card-text">{{ card.description }}</p>
+              <p class="card-text fw-bold">${{ card.price }}</p>
+              
+              <div class="star-rating">
+                <ng-container *ngFor="let star of [].constructor(5); let i = index">
+                  <i
+                    class="star"
+                    [class.filled]="i < Math.floor(card.rating)"
+                  ></i>
+                </ng-container>
+                <span class="rating-value">({{ card.rating }})</span>
+              </div>
+              
+              <p class="card-text">{{ card.learners }} learners enrolled</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  
+  <div class="container">
+    <div>
+      <div class="card-grid">
+        <div class="card-item" *ngFor="let card of card1" (click)="gotoselected()">
+          <div class="custom-card card">
+            <img [src]="card.image" class="card-img-top" [alt]="card.title" />
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ card.title }}</h5>
+              <p class="card-text">{{ card.description }}</p>
+              <p class="card-text fw-bold">{{ card.price  | currency:'INR'   }}</p>
+  
+              <!-- Display stars for rating -->
+              <div class="star-rating">
+                <ng-container *ngFor="let filled of getStarArray(card.rating)">
+                  <i class="star" [class.filled]="filled">★</i>
+                </ng-container>
+                <span class="rating-value">({{ card.rating }})</span>
+              </div>
+  
+              <p class="card-text">   <i class="fa fa-users"></i>{{ card.learners }} learners enrolled </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+    <router-outlet></router-outlet>
+
+
+  <!-- *ngFor="let cardSet of groupedCards; let i = index" class="carousel-item" [class.active]="i === 0" -->

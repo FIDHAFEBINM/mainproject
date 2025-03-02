@@ -1,0 +1,59 @@
+<div class="modal" *ngIf="showModal">
+    <div class="modal-dialogue">
+        <div class="modal-content">
+            <span type="button" style="width:55px;margin-left:400px;" (click)="closeRegisterModel()">
+                <i class="fa fa-times text-secondary fs-5"></i>
+            </span>
+
+            <form [formGroup]="registerForm" (ngSubmit)="onsave()">
+                <div class="modal-body">
+                    <label>Name</label> 
+                    <input type="text" formControlName="name">
+                    <div *ngIf="isSubmitted && registerForm.controls['name'].errors?.['required']" class="error">
+                        Name is required
+                    </div>
+                    <div *ngIf="isSubmitted && registerForm.controls['name'].errors?.['minlength']" class="error">
+                        Name must be at least 3 characters
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <label>Contact No</label>
+                    <input type="text" formControlName="contactno">
+                    <div *ngIf="isSubmitted && registerForm.controls['contactno'].errors?.['required']" class="error">
+                        Contact number is required
+                    </div>
+                    <div *ngIf="isSubmitted && registerForm.controls['contactno'].errors?.['pattern']" class="error">
+                        Contact number must be 10 digits
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <label>Email</label>
+                    <input type="email" formControlName="email">
+                    <div *ngIf="isSubmitted && registerForm.controls['email'].errors?.['required']" class="error">
+                        Email is required
+                    </div>
+                    <div *ngIf="isSubmitted && registerForm.controls['email'].errors?.['email']" class="error">
+                        Enter a valid email
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <label>Password</label>
+                    <input type="password" formControlName="password">
+                    <div *ngIf="isSubmitted && registerForm.controls['password'].errors?.['required']" class="error">
+                        Password is required
+                    </div>
+                    <div *ngIf="isSubmitted && registerForm.controls['password'].errors?.['minlength']" class="error">
+                        Password must be at least 6 characters
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

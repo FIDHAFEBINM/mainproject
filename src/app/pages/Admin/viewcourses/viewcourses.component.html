@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Teacher's Course Details</h2>
+
+  <div class="card mb-3" *ngFor="let course of teacherCourses">
+      <div class="row g-0">
+          <div class="col-md-4">
+              <img [src]="course.image" class="img-fluid rounded-start" alt="Course Image">
+          </div>
+          <div class="col-md-8">
+              <div class="card-body">
+                  <h5 class="card-title">{{ course.title }}</h5>
+                  <p class="card-text">{{ course.description }}</p>
+                  <p><strong>Duration:</strong> {{ course.duration }}</p>
+                  
+                  <!-- Star Rating -->
+                  <p><strong>Rating:</strong> 
+                      <span *ngFor="let star of getStars(course.rating)" class="star">&#9733;</span>
+                      <span *ngFor="let star of getEmptyStars(course.rating)" class="star-empty">&#9734;</span>
+                  </p>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

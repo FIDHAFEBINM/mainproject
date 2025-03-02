@@ -1,0 +1,50 @@
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Monthly Report - {{ selectedMonth.name }} {{ selectedYear }}</h2>
+  
+    <!-- Month & Year Selection -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="yearSelect" class="form-label">Select Year:</label>
+        <select id="yearSelect" class="form-select" (change)="updateYear($event)">
+          <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="monthSelect" class="form-label">Select Month:</label>
+        <select id="monthSelect" class="form-select" (change)="updateMonth($event)">
+          <option *ngFor="let month of months" [value]="month.name">{{ month.name }}</option>
+        </select>
+      </div>
+    </div>
+  
+    <!-- Registrations Progress Bar -->
+    <h5>Total Registrations ({{ selectedMonth.totalUsers }})</h5>
+    <div class="progress mb-4" style="height: 30px;">
+      <div 
+        class="progress-bar bg-primary" 
+        [style.width.%]="getPercentage(selectedMonth.teachers, selectedMonth.totalUsers)">
+        Teachers ({{ selectedMonth.teachers }})
+      </div>
+      <div 
+        class="progress-bar bg-success" 
+        [style.width.%]="getPercentage(selectedMonth.students, selectedMonth.totalUsers)">
+        Students ({{ selectedMonth.students }})
+      </div>
+    </div>
+  
+    <!-- Performance Metrics -->
+    <h5>Performance Metrics</h5>
+    <div *ngFor="let metric of selectedMonth.metrics" class="mb-3">
+      <h6>{{ metric.label }} ({{ metric.percentage }}%)</h6>
+      <div class="progress" style="height: 25px;">
+        <div class="progress-bar" [ngClass]="metric.color" [style.width.%]="metric.percentage">
+          {{ metric.percentage }}%
+        </div>
+      </div>
+    </div>
+  
+    <!-- Export Buttons -->
+    <!-- <button class="btn btn-secondary mt-3" (click)="exportToCSV()">Export as CSV</button>
+    <button class="btn btn-secondary mt-3 ms-2" (click)="exportToPDF()">Export as PDF</button> -->
+  </div>
+  

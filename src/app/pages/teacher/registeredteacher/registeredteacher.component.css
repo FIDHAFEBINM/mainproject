@@ -1,0 +1,89 @@
+/* Background color for the container */
+.container-fluid {
+    background-color: rgb(255, 245, 233);
+    padding: 0 20px; /* Add padding on smaller screens */
+}
+
+/* Styling for sub1 section */
+.sub1 {
+    padding: 100px;
+}
+
+/* Header (H2) styles */
+h2 {
+    color: rgba(6, 147, 227, 1);
+    font-size: 45px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Paragraph text styling */
+p {
+    font-size: 18px;
+}
+
+/* Card styling */
+.card {
+    border: none;
+    text-justify: inter-ideograph;
+    align-items: center;
+}
+
+/* General container padding */
+.container {
+    padding-top: 30px;
+}
+
+/* Heading for My Courses */
+.headings {
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgba(6, 147, 227, 1);
+}
+
+/* For medium screens (tablets and below) */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 10px;
+    }
+
+    .sub1 {
+        padding: 50px 10px;
+        text-align: center; /* Center the text for smaller screens */
+    }
+
+    h2 {
+        font-size: 36px; /* Smaller font size for h2 */
+    }
+
+    p {
+        font-size: 16px; /* Smaller paragraph text */
+    }
+
+    .headings {
+        font-size: 1.8rem; /* Adjust heading size */
+    }
+}
+
+/* For mobile screens */
+@media (max-width: 576px) {
+    .sub1 {
+        padding: 30px 10px;
+    }
+
+    h2 {
+        font-size: 28px; /* Smaller font size for h2 */
+    }
+
+    p {
+        font-size: 14px; /* Smaller font size for paragraphs */
+    }
+
+    .headings {
+        font-size: 1.5rem; /* Smaller font size for headings */
+    }
+
+    .container-fluid {
+        padding: 5px;
+    }
+}

@@ -1,0 +1,120 @@
+<!-- Filter Section
+<div class="container mt-4">
+    <h3>Filter Courses</h3>
+    <div class="d-flex gap-4">
+      <div class="form-group">
+        <label for="priceFilter">Price</label>
+        <select id="priceFilter" class="form-select" [(ngModel)]="selectedPrice">
+          <option value="0">Select Price</option>
+          <option value="low">Low to High</option>
+          <option value="high">High to Low</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="ratingFilter">Rating</label>
+        <select id="ratingFilter" class="form-select" [(ngModel)]="selectedRating">
+          <option value="0">Select Rating</option>
+          <option value="1">1 Star & Above</option>
+          <option value="2">2 Stars & Above</option>
+          <option value="3">3 Stars & Above</option>
+          <option value="4">4 Stars & Above</option>
+          <option value="5">5 Stars</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="courseTypeFilter" class="d-block text-center">Course Type</label>
+        <select id="courseTypeFilter" class="form-select" [(ngModel)]="selectedCourseType">
+          <option *ngFor="let type of courseTypes" [value]="type.value">
+            {{ type.label }}
+          </option>
+        </select>
+      </div>
+    
+  
+      <button class="btn btn-primary mt-4" (click)="applyFilters()">Apply Filters</button>
+    </div>
+  </div>
+  
+  
+   -->
+
+   <!-- Filter Section -->
+ <!-- <div class="container mt-4">
+
+    <h3 class="text-center mb-4 font-weight-bold">Filter Courses</h3>
+    <div class="row d-flex justify-content-between">
+      <div class="col-md-4 mb-3">
+        <div class="form-group">
+          <label for="priceFilter" class="font-weight-bold">Price</label>
+          <select id="priceFilter" class="form-select" [(ngModel)]="selectedPrice">
+            <option value="0">Select Price</option>
+            <option value="low">Low to High</option>
+            <option value="high">High to Low</option>
+          </select>
+        </div>
+      </div>
+    
+      <div class="col-md-4 mb-3">
+        <div class="form-group">
+          <label for="ratingFilter" class="font-weight-bold">Rating</label>
+          <select id="ratingFilter" class="form-select" [(ngModel)]="selectedRating">
+            <option value="0">Select Rating</option>
+            <option value="1">1 Star & Above</option>
+            <option value="2">2 Stars & Above</option>
+            <option value="3">3 Stars & Above</option>
+            <option value="4">4 Stars & Above</option>
+            <option value="5">5 Stars</option>
+          </select>
+        </div>
+      </div>
+    
+      <div class="col-md-4 mb-3">
+        <div class="form-group">
+          <label for="courseTypeFilter" class="font-weight-bold">Course Type</label>
+          <select id="courseTypeFilter" class="form-select" [(ngModel)]="selectedCourseType">
+            <option value="0">Select Course Type</option>
+            <option *ngFor="let type of courseTypes" [value]="type.value">
+              {{ type.label }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  
+    <div class="text-center">
+      <button class="btn btn-primary mt-3 px-4 py-2 font-weight-bold" (click)="applyFilters()">Apply Filters</button>
+    </div>
+  </div>  
+   -->
+
+
+   <div class="filter-container">
+    <h3>Filter by</h3>
+  
+    <!-- Subject Filter -->
+    <div class="filter-category">
+      <h4>Subject</h4>
+      <ul>
+        <li *ngFor="let subject of displayedSubjects">
+          <input type="checkbox" [value]="subject" (change)="onFilterChange('subject', subject)" />
+          {{ subject.name }} ({{ subject.count }})
+        </li>
+      </ul>
+      <div  class="a" (click)="toggleShowMore('subject')">{{ showAllSubjects ? 'Show less' : 'Show more' }}</div>
+    </div>
+  
+    <!-- Language Filter -->
+    <div class="filter-category">
+      <h4>Language <span class="info-icon">ℹ️</span></h4>
+      <ul>
+        <li *ngFor="let language of displayedLanguages">
+          <input type="checkbox" [value]="language" (change)="onFilterChange('language', language)" />
+          {{ language.name }} ({{ language.count }})
+        </li>
+      </ul>
+      <div  class="a" (click)="toggleShowMore('language')">{{ showAllLanguages ? 'Show less' : 'Show more' }}</div>
+    </div>
+  </div>
+  

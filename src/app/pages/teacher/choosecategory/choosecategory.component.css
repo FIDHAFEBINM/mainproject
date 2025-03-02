@@ -1,0 +1,72 @@
+/* Container for the form */
+.main{
+    width:100%;
+}
+form {
+    /* max-width: 600px; */
+    width:100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    /* border-radius: 8px; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  /* Styling the form elements */
+  div {
+    margin-bottom: 15px;
+  }
+
+  .sub{
+    margin-bottom: 15px;
+  }
+  
+  /* Styling the labels */
+  label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: inline-block;
+    color: #333;
+  }
+  
+  /* Styling the select and input elements */
+  select,input,textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+  
+  /* Styling for the error message */
+  div {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  /* Submit button styling */
+  button {
+    margin-left: 90%;
+    background-color: #838383;
+    color: white;
+    border: none;
+    padding: 3px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    /* width: 100%; */
+  }
+  
+  /* button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  } */
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  

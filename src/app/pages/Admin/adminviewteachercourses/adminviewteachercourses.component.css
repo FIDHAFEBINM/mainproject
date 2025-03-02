@@ -1,0 +1,59 @@
+.teachers-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 20px; /* Space between cards */
+  }
+  
+  .teacher-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s;
+  }
+  
+  .teacher-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  .teacher-card h5 {
+    margin: 5px 0;
+  }
+  
+  .teacher-card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .teacher-card button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .teacher-card button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 992px) {
+    .teachers-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 per row on tablets */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .teachers-grid {
+      grid-template-columns: repeat(1, 1fr); /* 1 per row on mobile */
+    }
+  }
+  

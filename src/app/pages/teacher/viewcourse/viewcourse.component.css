@@ -1,0 +1,30 @@
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(250px, 1fr)); /* Responsive layout */
+    gap: 15px; /* Adds space between grid items */
+  }
+  /* Container for star ratings */
+/* Container for star ratings */
+.star-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin: 5px 0;
+  }
+  
+  .star {
+    font-size: 18px;
+    color: #ccc;
+  }
+  
+  .star.filled {
+    color: #ffcc00; /* Gold for filled stars */
+  }
+  
+  .rating-value {
+    font-size: 14px;
+    color: #333;
+    margin-left: 5px;
+  }
+  

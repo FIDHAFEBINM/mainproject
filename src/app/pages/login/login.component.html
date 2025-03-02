@@ -1,0 +1,20 @@
+  <div class="login-container">
+      <form class="login-form" [formGroup]="loginform" (ngSubmit)="onSave()">
+          <h2>Login</h2>
+          <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" id="username" placeholder="Username" formControlName="username" required>
+          </div>
+          <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" formControlName="password" placeholder="Password">
+          </div>
+          <div class="forgot-password">
+            <a class="a" [routerLink]="['/forgetpassword']" routerLinkActive="router-link-active" >Forgot Password?</a>
+        </div>
+          <button type="submit" class="login-button">Login</button>
+        
+      </form>
+  </div>
+  <router-outlet></router-outlet>
+  

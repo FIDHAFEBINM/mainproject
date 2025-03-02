@@ -1,0 +1,37 @@
+<div class="main">
+<div class="sub1">
+    <form [formGroup]="priceForm" (ngSubmit)="onSubmit()">
+        <div class="sub">
+
+            <label for="title">Title</label>
+            <select id="title" formControlName="title">
+                <option value="">Select Title</option>
+                <option *ngFor="let title of title" [value]="title">
+                    {{ title }}
+                </option>
+            </select>
+            <div *ngIf="priceForm.get('title')?.touched && priceForm.get('title')?.invalid" class="sub">
+                Title is required.
+            </div>
+        </div>
+
+        <div>
+            <label for="price">Price</label>
+            <select id="price" formControlName="price">
+                <option value="">Select price</option>
+                <option *ngFor="let price of price" [value]="price">
+                    {{ price | currency:'INR'  }}
+                </option>
+            </select>
+            <div *ngIf="priceForm.get('price')?.touched && priceForm.get('price')?.invalid" class="sub">
+                Price is required
+            </div>
+        </div>
+        <div class="buttons">
+            <button type="submit" [disabled]="!priceForm.valid">Save</button>
+        </div>
+
+
+    </form>
+    </div>
+</div>

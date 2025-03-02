@@ -1,0 +1,66 @@
+<div class="mcq-container">
+    <h2>Multiple Choice Questions</h2>
+
+    <form (ngSubmit)="onSubmit()" #mcqForm="ngForm">
+
+        <div *ngFor="let question of questions; let i = index" class="question">
+            <div class="question-title">
+                <h3>{{ i + 1 }}. {{ question.question }}</h3>
+            </div>
+
+            <!-- Question Input -->
+            <div class="form-group">
+                <label for="question{{ i }}">Question:</label>
+                <input type="text" id="question{{ i }}" [(ngModel)]="question.question" name="question{{ i }}"
+                    required />
+            </div>
+            
+            <!-- Mark Input -->
+
+            <div class="form-group">
+                <label for="mark{{ i }}">Mark:</label>
+                <input type="number" id="mark{{ i }}" [(ngModel)]="question.mark" name="mark{{ i }}" required min="1" />
+            </div>
+
+            <!-- Options Inputs -->
+            <div class="options">
+                <label for="option{{ i }}1">Option 1:</label>
+                <input type="text" id="option{{ i }}1" [(ngModel)]="question.options[0]" name="option{{ i }}1"
+                    required />
+                <label for="option{{ i }}2">Option 2:</label>
+                <input type="text" id="option{{ i }}2" [(ngModel)]="question.options[1]" name="option{{ i }}2"
+                    required />
+                <label for="option{{ i }}3">Option 3:</label>
+                <input type="text" id="option{{ i }}3" [(ngModel)]="question.options[2]" name="option{{ i }}3"
+                    required />
+                <label for="option{{ i }}4">Option 4:</label>
+                <input type="text" id="option{{ i }}4" [(ngModel)]="question.options[3]" name="option{{ i }}4"
+                    required />
+              
+            </div>
+
+            <!-- Correct Answer Input -->
+            <div class="form-group">
+                <label for="correctAnswer{{ i }}">Correct Answer:</label>
+                <select id="correctAnswer{{ i }}" [(ngModel)]="question.correctAnswer" name="correctAnswer{{ i }}"
+                    required>
+                    <option value="">Select Correct Answer</option>
+                    <option *ngFor="let option of question.options" [value]="option">
+                        {{ option }}
+                    </option>
+                </select>
+            </div>
+
+            <hr />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" [disabled]="!mcqForm.form.valid">Submit</button>
+        </div>
+
+    </form>
+
+    <div class="add-question">
+        <button (click)="addQuestion()">Add New Question</button>
+    </div>
+</div>

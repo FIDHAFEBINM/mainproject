@@ -1,0 +1,38 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Teacher Course Management</h2>
+  
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Course Name</th>
+            <th>Teacher</th>
+            <th>Rating</th>
+            <th>Reviews</th>
+            <th>Videos</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let course of courses; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ course.name }}</td>
+            <td>{{ course.teacher }}</td>
+            <td>{{ course.rating }} ⭐</td>
+            <td>
+              <button class="btn btn-info btn-sm" (click)="viewReviews(course)">View</button>
+            </td>
+            <td>
+              <button class="btn btn-success btn-sm" (click)="viewVideos(course)">View</button>
+            </td>
+            <td>
+              <button class="btn btn-warning btn-sm" (click)="approveCourse(course.id)">Approve</button>
+              <button class="btn btn-danger btn-sm ms-2" (click)="deleteCourse(course.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

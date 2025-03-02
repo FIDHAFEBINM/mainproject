@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="cards">
+    <div class="card-bodys">
+
+      <!-- Always show rating -->
+      <div class="mb-3" (click)="submitReview()">
+        <span *ngFor="let star of stars; let i = index" (click)="rate(i + 1)" class="star">
+          <i class="fa" [ngClass]="i < rating ? 'highlighted' : ''">&#9733;</i> <!-- Unicode star symbol -->
+        </span>
+      </div>
+
+      <!-- <p class="text-muted">You rated: <strong>{{ rating }} / 5</strong></p> -->
+
+      <!-- Link to show review form -->
+      <div class="a" (click)="toggleReviewForm()" *ngIf="!showReviewForm">Give Review</div>
+
+      <!-- Review form (hidden by default) -->
+      <div [ngClass]="showReviewForm ? 'review-form-visible' : 'review-form-hidden'">
+        <div class="modal-backdrop" [ngClass]="{ 'show': showReviewForm }">
+          <div class="modal-content">
+            <button class="close-button" (click)="toggleReviewForm()">×</button>
+            <h4>Write Your Review</h4>
+            <div class="mb-3">
+              <textarea [(ngModel)]="reviewText" rows="3" placeholder="Write your review..."></textarea>
+            </div>
+            <button (click)="submitReview()">Submit Review</button>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

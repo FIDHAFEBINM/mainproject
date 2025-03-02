@@ -1,0 +1,22 @@
+.container-fluid{
+    background-color: rgb(255, 245, 233);
+}
+.sub1{
+    padding: 100px;
+}
+btn{
+    background-color:rgba(6, 147, 227, 1) ;
+}
+h2{
+    color:rgba(6, 147, 227, 1);
+    font-size: 45px;
+    font-family: 'Times New Roman', Times, serif;
+}
+p{
+    font-size: 18px;
+}
+.card{
+    border: none;
+    text-justify:inter-ideograph;
+    align-items: center;
+}

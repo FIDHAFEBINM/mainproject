@@ -1,0 +1,41 @@
+<div id="demo" class="container pic" >
+    <div class="sub1" style="width: 40%;">
+        <p>Education is not the filling of a pot but the lighting of a fire.</p>
+    </div>
+    <div class="sub2" style="width: 60%;">
+      <img src="https://th.bing.com/th/id/OIP.AXZg5Eu8mT0-jwPi-QvQ5QAAAA?&rs=1&pid=ImgDetMain">
+    </div>
+</div>
+<div class="container p-4">
+    <h3 class="fs-3">Skill Up Today</h3>
+    <div class="d-flex gap-5 fs-5 mt-3">
+      <a *ngFor="let category of courseCategories" href="#" class="text-secondary courses" [routerLink]="['/course']" routerLinkActive="router-link-active" >
+        {{ category.name }}
+      </a>
+    </div>
+  </div>
+  <div class="container-fluid sm">
+  <app-courses  [cards]='card2'></app-courses></div>
+  <app-displayreviewfirst></app-displayreviewfirst>  
+
+  <div class="container-fluid bg-white pt-2">
+    <h3 class="fs-3" style="margin-left: 120px;">Top Searches</h3>
+  </div>
+  <div class="container-fluid">
+  <app-courses [cards]='card1'></app-courses></div>
+
+  <!-- <div class="plans-container">
+    <div *ngFor="let plan of plans" class="plan-item" [ngClass]="{ 'recommended': plan.recommended }">
+      <h2 class="plan-name">{{ plan.name }}</h2>
+      <p class="plan-price">{{ plan.price | currency :"IND" }}</p>
+      <p class="plan-description">This plan includes:</p>
+      <ul class="plan-features">
+        <li *ngFor="let feature of plan.features">{{ feature }}</li>
+      </ul>
+      <button class="btn btn-primary">Choose {{ plan.name }}</button>
+    </div>
+  </div> -->
+
+  
+  
+

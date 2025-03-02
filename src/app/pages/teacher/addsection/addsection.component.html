@@ -1,0 +1,211 @@
+<!-- <div class="main">
+    <div class="sub1">
+        <div class="form-container">
+            <form (ngSubmit)="onSubmit()" #addSectionForm="ngForm">
+                <div class="form-group">
+                    <label for="title">Select Title:</label>
+                    <select id="title" name="title" [(ngModel)]="selectedTitle" required>
+                        <option value="">Select a title</option>
+                        <option *ngFor="let title of titles">{{ title }}</option>
+                    </select>
+                </div>
+           
+                <div class="form-group">
+                    <label for="sectionName"> Add New Section </label>
+                    <input type="text" id="sectionName" name="sectionName" [(ngModel)]="sectionName" required />
+                </div>
+                <div class="form-group">
+                    <button type="submit" [disabled]="!selectedTitle || (!selectedsection && !sectionName) ">
+                        Add+
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="sub2">
+     
+    <div class="videos">
+            <form (ngSubmit)="onSubmit()" #addSectionForm="ngForm">
+                <div class="form-group">
+                    <label for="videoTitle">Video Title:</label>
+                    <input type="text" id="videoTitle" name="videoTitle" [(ngModel)]="videoTitle" required />
+                </div>
+                <div class="form-group">
+                    <label for="videoFile">Select Video:</label>
+                    <input type="file" id="videoFile" name="videoFile" (change)="onFileChange($event)"
+                        accept="video/*" required />
+                </div>
+                <div class="form-group">
+                    <button type="submit" [disabled]="!addSectionForm.form.valid">
+                        Add+
+                    </button>
+                </div>
+            </form>
+        </div>
+    
+    
+    
+
+
+    <div class="pdf-upload">
+        <form (ngSubmit)="onSubmit()" #pdfUploadForm="ngForm">
+          <div class="form-group">
+            <label for="pdfTitle">PDF Title:</label>
+            <input type="text" id="pdfTitle" name="pdfTitle" [(ngModel)]="pdfTitle" required />
+          </div>
+          <div class="form-group">
+            <label for="pdfFile">Select PDF:</label>
+            <input type="file" id="pdfFile" name="pdfFile" (change)="onFileChanges($event)" accept="application/pdf"
+              required />
+          </div>
+          <div class="form-group">
+            <button type="submit" [disabled]="!pdfUploadForm.form.valid">
+              Upload PDF
+            </button>
+          </div>
+        </form>
+      </div>
+
+
+</div>
+
+</div>
+
+ <div class="form-group">
+    <label for="section">Select section:</label>
+    <select id="section" name="section" [(ngModel)]="selectedsection" required>
+        <option value="">Select a section</option>
+         <option *ngFor="let section of sections">{{ section }}</option>
+
+    </select>
+</div> -->
+
+
+
+<div class="main container">
+    <!-- Save Button for All Sections -->
+    <div class="save-button-container">
+        <button (click)="saveAllSections()">Save All Sections</button>
+    </div>
+
+    <!-- Section Creation Form -->
+    <div class="add-section-container">
+        <h2>Create a New Section</h2>
+        <form (ngSubmit)="addSection()">
+            <!-- <div class="form-group">
+                <label for="title">Select a Title:</label>
+                <select id="title" name="title" [(ngModel)]="selectedTitle" required>
+                    <option value="">Please select a title</option>
+                    <option *ngFor="let title of titles">{{ title }}</option>
+                </select>
+            </div> -->
+
+            <div class="form-group">
+                <label for="sectionName">Section Name:</label>
+                <input type="text" id="sectionName" name="sectionName" [(ngModel)]="sectionName"
+                    placeholder="Enter section name" required />
+            </div>
+
+            <button type="submit" [disabled]="!sectionName">
+                Add Section
+            </button>
+        </form>
+    </div>
+
+    <!-- Display Sections -->
+    <div class="sections-container" *ngFor="let section of sections; let i = index">
+        <div class="section">
+            <!-- Section Title -->
+            <div class="section-header">
+                <h3>{{ section.name }}</h3>
+            </div>
+            <div class="addingfiles">
+                <!-- Add Video Form -->
+                <div class="add-video-form" style="width: 50%;">
+                    <form (ngSubmit)="addVideoToSection(section, i)">
+                        <div class="form-group">
+                            <label for="videoTitle-{{ i }}">Video Title:</label>
+                            <input type="text" id="videoTitle-{{ i }}" name="videoTitle"
+                                [(ngModel)]="section.videoTitle" placeholder="Enter video title" />
+                        </div>
+                        <div class="form-group">
+                            <label for="videoFile-{{ i }}">Upload Video:</label>
+                            <input type="file" id="videoFile-{{ i }}" name="videoFile" class="form-control"
+                                (change)="onFileChange($event, section, 'video')" accept="video/*" />
+                        </div>
+                        <div class="button-container">
+                            <button type="submit" [disabled]="!section.videoTitle || !section.videoFile">
+                                Add Video
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- Add PDF Form -->
+                <div class="add-pdf-form" style="width: 50%;">
+                    <form (ngSubmit)="addPdfToSection(section, i)">
+                        <div class="form-group">
+                            <label for="pdfTitle-{{ i }}">PDF Title:</label>
+                            <input type="text" id="pdfTitle-{{ i }}" name="pdfTitle" [(ngModel)]="section.pdfTitle"
+                                placeholder="Enter PDF title" />
+                        </div>
+                        <div class="form-group">
+                            <label for="pdfFile-{{ i }}">Upload PDF:</label>
+                            <input type="file" id="pdfFile-{{ i }}" name="pdfFile" class="form-control"
+                                (change)="onFileChange($event, section, 'pdf')" accept="application/pdf" />
+                        </div>
+                        <div class="button-container">
+                            <button type="submit" [disabled]="!section.pdfTitle || !section.pdfFile">
+                                Add PDF
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+            <!-- <div class="question btn " (click)="AddQuestionpaper()">Add Question Paper</div> -->
+
+            <!-- Button to Show/Hide Quiz Component -->
+
+            <div class="buttons">
+                <div class="question btn" (click)="toggleQuiz(i)">
+                    {{ section.showQuiz ? 'Hide' : 'Add Question Paper' }}
+                </div>
+                <!-- Add Assignment Button -->
+            <div class="question btn" (click)="toggleAssignment(i)">
+                {{ section.showAssignment ? 'Hide Assignment' : 'Add Assignment' }}
+            </div>
+            </div>
+        
+        </div>
+        <app-questionpaper *ngIf="section.showQuiz" [section]="section"></app-questionpaper>
+        
+
+        <!-- Assignment Form -->
+        <div class="add-assignment-form" *ngIf="section.showAssignment">
+            <form (ngSubmit)="addAssignmentToSection(sections)">
+                <div class="form-group">
+                    <label for="assignmentTopic-{{ i }}">Assignment Topic:</label>
+                    <input type="text" id="assignmentTopic-{{ i }}" name="assignmentTopic"
+                        [(ngModel)]="section.assignmentTopic" placeholder="Enter assignment topic" />
+                </div>
+                <div class="form-group">
+                    <label for="assignmentAnswers-{{ i }}">Assignment Answers:</label>
+                    <textarea id="assignmentAnswers-{{ i }}" name="assignmentAnswers"
+                        [(ngModel)]="section.assignmentAnswers" rows="4"
+                        placeholder="Enter assignment answers"></textarea>
+                </div>
+                <div class="button-container">
+                    <button type="submit" [disabled]="!section.assignmentTopic || !section.assignmentAnswers">
+                        Add Assignment
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</div>
