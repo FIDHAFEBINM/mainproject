@@ -33,6 +33,7 @@ import { AdminreportsComponent } from './pages/Admin/adminreports/adminreports.c
 import { TeachermonthlyreportComponent } from './pages/teacher/teachermonthlyreport/teachermonthlyreport.component';
 import { AddcategoryadminComponent } from './pages/Admin/addcategoryadmin/addcategoryadmin.component';
 import { UploadassignmentComponent } from './pages/website/uploadassignment/uploadassignment.component';
+import { ViewpaymentteacherComponent } from './pages/teacher/viewpaymentteacher/viewpaymentteacher.component';
 
 export const routes: Routes = [
     {
@@ -141,13 +142,17 @@ export const routes: Routes = [
                 path:'selectedEdit',
                 component:SelectedcourseeditComponent
             },
-            {
-                path:'registeredteacher',
-                component:RegisteredteacherComponent
-            },
+            // {
+            //     path:'registeredteacher',
+            //     component:RegisteredteacherComponent
+            // },
             {
                 path:'teacherreport',
                 component:TeachermonthlyreportComponent
+            },
+            {
+                path:'viewpayment',
+                component:ViewpaymentteacherComponent
             }
          
          

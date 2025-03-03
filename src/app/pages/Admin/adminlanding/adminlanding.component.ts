@@ -16,8 +16,8 @@ export class AdminlandingComponent {
     { key: 'adminlandingcontent', label: 'Dashboard' },
     { key: 'adminviewteachercourses', label: 'Manage Teachers' },
     { key: 'adminviewusers', label: 'Manage Users' },
-    { key: 'adminviewcourses', label: 'Manage Courses' },
-    { key: 'adminreports', label: 'Reports' },  
+    // { key: 'adminviewcourses', label: 'Manage Courses' },
+    // { key: 'adminreports', label: 'Reports' },  
     { key: 'addcategory', label: 'Manage Category'},    
   
   ];

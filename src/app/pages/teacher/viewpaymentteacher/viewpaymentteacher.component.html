@@ -1,0 +1,22 @@
+<div class="container mt-4">
+    <h2 class="text-center">Payment Details</h2>
+    <table class="table table-striped table-bordered mt-3">
+      <thead class="table-dark">
+        <tr>
+          <th>User Name</th>
+          <th>Course Name</th>
+          <th>Amount Paid ($)</th>
+          <th>Payment Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of paymentData">
+          <td>{{ payment.userName }}</td>
+          <td>{{ payment.courseName }}</td>
+          <td>{{ payment.amountPaid | currency : 'INR'}}</td>
+          <td>{{ payment.paymentDate }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

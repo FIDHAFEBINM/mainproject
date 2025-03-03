@@ -5,11 +5,12 @@ import { AddsectionComponent } from "../addsection/addsection.component";
 import { PricingComponent } from "../pricing/pricing.component";
 import { ViewcourseComponent } from "../viewcourse/viewcourse.component";
 import { RouterOutlet } from '@angular/router';
+import { ViewpaymentteacherComponent } from "../viewpaymentteacher/viewpaymentteacher.component";
 
 @Component({
   selector: 'app-courseadd',
   standalone: true,
-  imports: [ChoosecategoryComponent, CommonModule, AddsectionComponent, PricingComponent, ViewcourseComponent],
+  imports: [ChoosecategoryComponent, CommonModule, AddsectionComponent, PricingComponent, ViewcourseComponent, ViewpaymentteacherComponent],
   templateUrl: './courseadd.component.html',
   styleUrl: './courseadd.component.css'
 })
@@ -20,6 +21,7 @@ export class CourseaddComponent {
   pricing=false
   accountdetails=false
   viewing=false
+  Payment=false
 
   hideAllExcept(profile: string) {
     this.addcourse = profile === 'addcourse';
@@ -27,6 +29,7 @@ export class CourseaddComponent {
     this.pricing= profile === 'pricing'
     this.accountdetails = profile === 'account'
     this.viewing= profile === 'viewing'
+    this.Payment= profile === 'Payment'
     
   }
 

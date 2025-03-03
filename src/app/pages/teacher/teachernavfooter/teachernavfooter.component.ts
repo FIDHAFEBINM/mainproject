@@ -17,4 +17,8 @@ export class TeachernavfooterComponent {
    logout(){
     this.router.navigate(['elearn'])
    }
+
+   gotohome(){
+    this.router.navigate(['/teacher/registeredteacher'])
+   }
 }
