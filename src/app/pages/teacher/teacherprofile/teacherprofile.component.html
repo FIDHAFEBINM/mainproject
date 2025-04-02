@@ -1,75 +1,46 @@
 <div class="container mt-4" style="margin-bottom: 20px;">
-    <h3>Teacher Profile Details</h3>
-    <form #teacherForm="ngForm" (ngSubmit)="onSubmit(teacherForm)">
-      <!-- Teacher's Profile Picture -->
-      <div class="mb-3">
-        <label for="teacherImage" class="form-label">Profile Picture</label>
-        <input type="file" class="form-control" id="teacherImage" name="teacherImage" (change)="onImageChange($event)" accept="image/*" ngModel>
-        <div *ngIf="imagePreview" class="mt-2">
-          <img [src]="imagePreview" alt="Teacher's Profile Picture" class="img-fluid" style="max-width: 200px;">
-        </div>
+  <h3>Teacher Profile Details</h3>
+  <form [formGroup]="teacherForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" name="userId">
+
+    <!-- Teacher's Profile Picture -->
+    <div class="mb-3">
+      <label for="teacherImage" class="form-label">Profile Picture</label>
+      <input type="file" class="form-control" id="teacherImage" formControlName="profileImage" (change)="onImageChange($event)" accept="image/*">
+      <div *ngIf="imagePreview" class="mt-2">
+        <img [src]="imagePreview" alt="Teacher's Profile Picture" class="img-fluid" style="max-width: 200px;">
       </div>
-  
-      <!-- Name -->
-      <div class="mb-3">
-        <label for="teacherName" class="form-label">Name</label>
-        <input type="text" class="form-control" id="teacherName" name="teacherName" required ngModel>
+    </div>
+
+    <!-- Subject -->
+    <div class="mb-3"> 
+      <label for="teacherSubject" class="form-label">Subject</label>
+      <input type="text" class="form-control" id="teacherSubject" formControlName="subject">
+      <div *ngIf="teacherForm.get('subject')?.invalid && teacherForm.get('subject')" class="text-danger">
+        Subject is required.
       </div>
-  
-      <!-- Email -->
-      <div class="mb-3">
-        <label for="teacherEmail" class="form-label">Email</label>
-        <input type="email" class="form-control" id="teacherEmail" name="teacherEmail" required ngModel>
-      </div>
-  
-      <!-- Phone Number -->
-      <div class="mb-3">
-        <label for="teacherPhone" class="form-label">Phone Number</label>
-        <input type="tel" class="form-control" id="teacherPhone" name="teacherPhone" ngModel>
-      </div>
-  
-      <!-- Subject -->
-      <div class="mb-3">
-        <label for="teacherSubject" class="form-label">Subject</label>
-        <input type="text" class="form-control" id="teacherSubject" name="teacherSubject" required ngModel>
-      </div>
-  
-      <!-- Experience -->
-      <div class="mb-3">
-        <label for="teacherExperience" class="form-label">Years of Experience</label>
-        <input type="number" class="form-control" id="teacherExperience" name="teacherExperience" min="0" ngModel>
-      </div>
-  
-      <!-- Qualifications -->
-      <div class="mb-3">
-        <label for="teacherQualifications" class="form-label">Qualifications</label>
-        <textarea class="form-control" id="teacherQualifications" name="teacherQualifications" rows="3" ngModel></textarea>
-      </div>
-  
-      <!-- Online Availability -->
-      <div class="mb-3">
-        <label for="teacherAvailability" class="form-label">Online Availability (Hours per week)</label>
-        <input type="number" class="form-control" id="teacherAvailability" name="teacherAvailability" min="1" ngModel>
-      </div>
-  
-      <!-- Social Media Links -->
-      <div class="mb-3">
-        <label for="teacherFacebook" class="form-label">Facebook</label>
-        <input type="url" class="form-control" id="teacherFacebook" name="teacherFacebook" placeholder="https://facebook.com/teacher" ngModel>
-      </div>
-      
-      <div class="mb-3">
-        <label for="teacherTwitter" class="form-label">Twitter</label>
-        <input type="url" class="form-control" id="teacherTwitter" name="teacherTwitter" placeholder="https://twitter.com/teacher" ngModel>
-      </div>
-      
-      <div class="mb-3">
-        <label for="teacherLinkedIn" class="form-label">LinkedIn</label>
-        <input type="url" class="form-control" id="teacherLinkedIn" name="teacherLinkedIn" placeholder="https://linkedin.com/in/teacher" ngModel>
-      </div>
-  
-      <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary" [disabled]="!teacherForm.valid">Submit</button>
-    </form>
-  </div>
-  
+    </div>
+
+    <!-- Experience -->
+    <div class="mb-3">
+      <label for="teacherExperience" class="form-label">Years of Experience</label>
+      <input type="number" class="form-control" id="teacherExperience" formControlName="experience">
+    </div>
+
+    <!-- Qualifications -->
+    <div class="mb-3">
+      <label for="teacherQualifications" class="form-label">Qualifications</label>
+      <textarea class="form-control" id="teacherQualifications" formControlName="qualification" rows="3"></textarea>
+    </div>
+
+    <!-- Online Availability -->
+    <div class="mb-3">
+      <label for="teacherAvailability" class="form-label">Online Availability (Hours per week)</label>
+      <input type="number" class="form-control" id="teacherAvailability" formControlName="availability">
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary" [disabled]="teacherForm.invalid">
+      {{ isEditMode ? 'Update Profile' : 'Create Profile' }}
+    </button>  </form>
+</div>

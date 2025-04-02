@@ -4,7 +4,7 @@
         <ul>
             <div class="arrow" (click)="hideAllExcept('addcourse')" ><li><a routerLink="/development"   >Add Course</a></li></div>
             <div class="arrow" (click)="hideAllExcept('addsection')"><li><a routerLink="/development" >Add Section</a></li></div>
-            <div class="arrow" (click)="hideAllExcept('pricing')"><li><a routerLink="/development">Pricing</a></li></div>
+            <!-- <div class="arrow" (click)="hideAllExcept('pricing')"><li><a routerLink="/development">Pricing</a></li></div> -->
             <div class="arrow" (click)="hideAllExcept('viewing')"><li><a routerLink="/development">View Course</a></li></div>
             <div class="arrow" (click)="hideAllExcept('Payment')"><li><a routerLink="/development">View Payment</a></li></div>
 
@@ -16,8 +16,8 @@
     </div>
     <div>
         <app-choosecategory [hidden]="!addcourse"></app-choosecategory>
-        <app-addsection [hidden]="!addsection"></app-addsection>
-        <app-pricing [hidden]="!pricing"></app-pricing>
+        <app-addsections [hidden]="!addsection"></app-addsections>
+        <!-- <app-pricing [hidden]="!pricing"></app-pricing> -->
         <app-viewcourse [hidden]="!viewing"></app-viewcourse>
         <app-viewpaymentteacher [hidden]="!Payment"></app-viewpaymentteacher>
 

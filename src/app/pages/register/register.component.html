@@ -8,18 +8,18 @@
             <form [formGroup]="registerForm" (ngSubmit)="onsave()">
                 <div class="modal-body">
                     <label>Name</label> 
-                    <input type="text" formControlName="name">
-                    <div *ngIf="isSubmitted && registerForm.controls['name'].errors?.['required']" class="error">
+                    <input type="text" formControlName="username" name="username">
+                    <div *ngIf="isSubmitted && registerForm.controls['username'].errors?.['required']" class="error">
                         Name is required
                     </div>
-                    <div *ngIf="isSubmitted && registerForm.controls['name'].errors?.['minlength']" class="error">
+                    <div *ngIf="isSubmitted && registerForm.controls['username'].errors?.['minlength']" class="error">
                         Name must be at least 3 characters
                     </div>
                 </div>
 
                 <div class="modal-body">
                     <label>Contact No</label>
-                    <input type="text" formControlName="contactno">
+                    <input type="text" formControlName="contactno" name="contactno">
                     <div *ngIf="isSubmitted && registerForm.controls['contactno'].errors?.['required']" class="error">
                         Contact number is required
                     </div>
@@ -30,7 +30,7 @@
 
                 <div class="modal-body">
                     <label>Email</label>
-                    <input type="email" formControlName="email">
+                    <input type="email" formControlName="email" name="email">
                     <div *ngIf="isSubmitted && registerForm.controls['email'].errors?.['required']" class="error">
                         Email is required
                     </div>
@@ -41,7 +41,7 @@
 
                 <div class="modal-body">
                     <label>Password</label>
-                    <input type="password" formControlName="password">
+                    <input type="password" formControlName="password" name="password">
                     <div *ngIf="isSubmitted && registerForm.controls['password'].errors?.['required']" class="error">
                         Password is required
                     </div>
@@ -50,8 +50,15 @@
                     </div>
                 </div>
 
+           
+                    <!-- <input type="hidden" class="hidden" formControlName="role" name="role" readonly> -->
+                    <input type="hidden" formControlName="role" name="role">
+                    <div *ngIf="isSubmitted && registerForm.controls['role'].errors?.['required']" class="error">
+                        Role is required
+                    </div>
+
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="submit" class="btn btn-success" >Submit</button>
                 </div>
             </form>
         </div>

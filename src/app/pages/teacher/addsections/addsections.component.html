@@ -1,0 +1,150 @@
+<!-- <div class="container">
+    <h2>Course Sections Management</h2>
+  
+    <div class="form-group">
+      <label>Select Course:</label>
+      <select [(ngModel)]="selectedCourseId" class="form-control" required>
+        <option *ngFor="let course of courses" [value]="course._id">{{ course.topic }}</option>
+      </select>
+    </div>
+  
+    <form (submit)="createSection()">
+      <div class="form-group">
+        <label>Section Name</label>
+        <input [(ngModel)]="newSection.name" name="name" class="form-control" required />
+      </div>
+  
+      <div class="form-group">
+        <label>Video Title</label>
+        <input [(ngModel)]="newSection.videoTitle" name="videoTitle" class="form-control" />
+        <input type="file" (change)="onFileChange($event, 'video')" />
+      </div>
+  
+      <div class="form-group">
+        <label>PDF Title</label>
+        <input [(ngModel)]="newSection.pdfTitle" name="pdfTitle" class="form-control" />
+        <input type="file" (change)="onFileChange($event, 'pdf')" />
+      </div>
+  
+      <button type="submit" class="btn btn-primary mt-3">Add Section</button>
+    </form>
+  
+    <div *ngFor="let course of sectionsByCourse" class="card mt-3">
+      <div class="card-header">
+        <h5>{{ course.course.name }}</h5>
+      </div>
+  
+      <div *ngFor="let section of course.sections" class="card-body">
+        <h6>{{ section.name }}</h6>
+        <video *ngIf="section.video.file" [src]="'http://localhost:3000' + section.video.file" controls></video>
+      </div>
+    </div>
+  </div>
+   -->
+
+
+
+
+
+   <div class="container">
+    <h2>Course Sections Management</h2>
+  
+    <!-- Course Selection -->
+    <div class="form-group">
+      <label>Select Course:</label>
+      <select [(ngModel)]="selectedCourseId" class="form-control" (change)="loadSectionsByCourse()">
+        <option [value]="''">Select a course</option>
+        <option *ngFor="let course of courses" [value]="course._id">{{ course.topic }}</option>
+      </select>
+    </div>
+  
+    <!-- Form to Add New Section -->
+    <form (submit)="createSection()" class="add-section-form">
+      <div class="form-group">
+        <label>Section Name</label>
+        <input [(ngModel)]="newSection.name" name="name" class="form-control" required />
+      </div>
+  
+      <div class="form-group">
+        <label>Video Title</label>
+        <input [(ngModel)]="newSection.videoTitle" name="videoTitle" class="form-control" />
+        <input type="file" class="form-control mt-3" (change)="onFileChange($event, 'video')" />
+      </div>
+  
+      <div class="form-group">
+        <label>PDF Title</label>
+        <input [(ngModel)]="newSection.pdfTitle" name="pdfTitle" class="form-control" />
+        <input type="file" (change)="onFileChange($event, 'pdf')" class="form-control mt-3" />
+      </div>
+  
+      <button type="submit" class="btn btn-primary mt-3">Add Section</button>
+    </form>
+  
+    <!-- Display Sections by Course -->
+    <!-- <div *ngFor="let course of sectionsByCourse" class="card mt-3">
+      <div class="card-header" (click)="toggleAddSection(course._id)">
+        <h5>{{ course.course.topic }}</h5> -->
+        <!-- <button class="btn btn-sm btn-outline-secondary">+ Add Section</button> -->
+      <!-- </div> -->
+  
+      <!-- <div *ngIf="course.showAddSection" class="card-body p-3"> -->
+        <!-- <form (submit)="createSection()">
+          <div class="form-group">
+            <label>Section Name</label>
+            <input [(ngModel)]="newSection.name" name="name" class="form-control" required />
+          </div>
+  
+          <div class="form-group">
+            <label>Video Title</label>
+            <input [(ngModel)]="newSection.videoTitle" name="videoTitle" class="form-control" />
+            <input type="file" class="form-control" (change)="onFileChange($event, 'video')" />
+          </div>
+  
+          <div class="form-group">
+            <label>PDF Title</label>
+            <input [(ngModel)]="newSection.pdfTitle" name="pdfTitle" class="form-control" />
+            <input type="file" (change)="onFileChange($event, 'pdf')" />
+          </div>
+  
+          <button type="submit" class="btn btn-success mt-3">Add Section</button>
+        </form> -->
+      <!-- </div> -->
+  
+      <!-- Display Existing Sections -->
+   <div>
+      <div *ngIf="sections.length > 0" class="mt-4">
+
+      <div *ngFor="let section of sections" class="card-body">
+        <h6>{{ section.name }}</h6>
+        <video *ngIf="section.video" [src]="'http://localhost:3000' + section.video.file" style="width: 300px; height: 200px; object-fit: cover;" controls></video>
+        <!-- <p *ngIf="section.pdfTitle">{{ section.pdfTitle }}</p> -->
+        <p *ngIf="section.pdf">
+          <a [href]="'http://localhost:3000' + section.pdf.file" target="_blank" class="btn btn-link">
+            View PDF: {{ section.pdfTitle }}
+          </a>
+        </p>
+        <!-- Toggle Buttons for Each Section -->
+        <div class="btn-group mt-2">
+          <button class="btn btn-primary btn-sm" (click)="toggleSection(section, 'questionPaper')">
+            Add Question Paper
+          </button>
+          <button class="btn btn-secondary btn-sm" (click)="toggleSection(section, 'assignment')">
+            Add Assignment
+          </button>
+        </div>
+        <div class="mt-2">
+          <app-questionpaper *ngIf="activeSectionId === section._id && activeTab === 'questionPaper'"
+                                  [sectionId]="section._id"></app-questionpaper>
+
+          <app-addassignment *ngIf="activeSectionId === section._id && activeTab === 'assignment'"
+                              [sectionId]="section._id"></app-addassignment>
+        </div>
+        <button (click)="deleteSection(section._id)" class="btn btn-danger btn-sm mt-2">Delete</button>
+      </div>
+    </div>
+    </div>
+    <div *ngIf="sections.length === 0 && selectedCourseId" class="alert alert-warning mt-4">
+      No sections available for this course.
+    </div>
+  </div>
+  

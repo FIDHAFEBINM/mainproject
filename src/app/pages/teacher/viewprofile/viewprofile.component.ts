@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
+import { MainService } from '../../../service/main.service';
 
 @Component({
   selector: 'app-viewprofile',
@@ -8,27 +9,67 @@ import { Component } from '@angular/core';
   templateUrl: './viewprofile.component.html',
   styleUrl: './viewprofile.component.css'
 })
-export class ViewprofileComponent {
+export class ViewprofileComponent implements OnInit{
 
-  profileData = {
-    name: 'Fidha Febin',
-    description: `I am an experienced web development instructor with over 5 years of teaching 
-    experience. My expertise lies in teaching HTML, CSS, JavaScript, and Angular. I specialize 
-    in making complex concepts easy to understand for learners of all levels. Whether you're a 
-    beginner or someone looking to advance your skills, I focus on providing hands-on, practical 
-    learning experiences to help you achieve your development goals.`,
-    profilePicture: '/image/doc.jpg',
-    courses: ['HTML Basics', 'Advanced CSS', 'JavaScript Essentials', 'Mastering Angular'],
-    about: `I am passionate about making web development accessible to everyone. My teaching philosophy 
-    is centered on empowering students through hands-on projects and real-world examples. My courses are 
-    designed to be engaging, interactive, and focused on building skills that will prepare you for the 
-    demands of the industry.`,
-    contactEmail: 'teacher@example.com'
-  };
+  profileData :any= [];
+  description:any=[];
+  teacherId: string = localStorage.getItem('loginId') || '';
+  teacherreviews: any[] = [];
+  teachertotalreview: number = 0;
+  averageteacherrating: number = 0;
+  
 
-  rating: number = 4.3;
-  totalRatings: number = 1742;
-  learners: number = 122216;
+  // rating: number = 4.3;
+  // totalRatings: number = 1742;
+  // learners: number = 122216;
+
+  constructor(private mainserve:MainService){}
+  ngOnInit(){
+    this.viewteacher();
+    this.viewdescription()
+    this.loadreviewbyteacher()
+  }
+
+  viewteacher(){
+    this.mainserve.viewteacher(this.teacherId).subscribe((res:any)=>{
+      console.log(res);
+      this.profileData = res;
+    } )
+  }
+
+  viewdescription(){
+    this.mainserve.viewtaecherdescription(this.teacherId).subscribe((res:any)=>{
+      console.log(res);
+      this.description = res;
+    } )
+  }
+
+  loadreviewbyteacher() {
+    this.mainserve.viewreviewbyteacherid(this.teacherId).subscribe(
+      (res: any) => {
+        this.teacherreviews = res;
+        this.teachertotalreview = this.teacherreviews.length;
+
+        if (this.teachertotalreview > 0) {
+          const totalRating = this.teacherreviews.reduce(
+            (sum, review) => sum + review.rating,
+            0
+          );
+          this.averageteacherrating = totalRating / this.teachertotalreview;
+        } else {
+          this.averageteacherrating = 0;
+        }
+
+        console.log('Teacher Reviews:', this.teacherreviews);
+        console.log(
+          `Average Rating: ${this.averageteacherrating}, Total Reviews: ${this.teachertotalreview}`
+        );
+      },
+      (error) => {
+        console.error('Error fetching teacher reviews:', error);
+      }
+    );
+  }
 
   getFullStars(rating: number): number[] {
     return Array(Math.floor(rating)).fill(0);

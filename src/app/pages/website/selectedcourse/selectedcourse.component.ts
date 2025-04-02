@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DisplayreviewComponent } from "../../../displayreview/displayreview.component";
 import { ReviewComponent } from "../../../review/review.component";
+import { MainService } from '../../../service/main.service';
+import { Course } from '../../../models/corse';
 
 @Component({
   selector: 'app-selectedcourse',
@@ -12,6 +14,7 @@ import { ReviewComponent } from "../../../review/review.component";
   styleUrl: './selectedcourse.component.css'
 })
 export class SelectedcourseComponent implements OnInit {
+  courseId: string | null=null
   itemsToShow: number = 10;
   initialItemsToShow: number = 10;
   price=300
@@ -21,81 +24,21 @@ export class SelectedcourseComponent implements OnInit {
   learners: number = 122216;
   reviewCount = 25;
   user = { isTeacher: true };
+  selectedcourse: any = [];  // Or use Course model if applicable
 
   // Stars array for visual representation
   starsArray: string[] = [];
+  reviews: any[] = [];
+  averageRating: number = 0;
+  totalReviews: number = 0;
+  teacher:any=[]
+ 
+
+  teacherreviews:any[]=[]
+  id=''
 
 
-
-  courses = [
-    {
-      id: 'collapse1',
-      title: 'Copywriting Essentials, Curriculum, Resources, & AIDA Copywriting Framework',
-      details: '8 lectures · 57min',
-    },
-    {
-      id: 'collapse2',
-      title: 'Introduction to ChatGPT + Gemini for Beginners & 90+ Reels Creation with Canva',
-      details: '3 lectures · 48min',
-    },
-    {
-      id: 'collapse3',
-      title: 'ChatGPT & Gemini for Social Media Planning, Content & Reels Writing, Ads Library',
-      details: '15 lectures · 1hr 46min',
-    },
-    {
-      id: 'collapse4',
-      title: 'Copywriting for Facebook & Instagram (Social Media Copywriting)',
-      details: '8 lectures · 42min',
-    },
-    {
-      id: 'collapse5',
-      title: 'Copywriting Ideas & Fantastic Free Keywords Research',
-      details: '2 lectures · 33min',
-    },
-    {
-      id: 'collapse6',
-      title: '23 General Copywriting Templates & Developing Copywriting Skills',
-      details: '3 lectures · 1hr 9min',
-    },
-    {
-      id: 'collapse7',
-      title: '23 General Copywriting Templates & Developing Copywriting Skills',
-      details: '3 lectures · 1hr 9min',
-    },
-    {
-      id: 'collapse8',
-      title: '23 General Copywriting Templates & Developing Copywriting Skills',
-      details: '3 lectures · 1hr 9min',
-    },
-    {
-      id: 'collapse9',
-      title: '23 General Copywriting Templates & Developing Copywriting Skills',
-      details: '3 lectures · 1hr 9min',
-    },
-    {
-      id: 'collapse10',
-      title: '23 General Copywriting Templates & Developing Copywriting Skills',
-      details: '3 lectures · 1hr 9min',
-    },
-    {
-      id: 'collapse11',
-      title: '23 General Copywriting Templates & Developing Copywriting Skills',
-      details: '3 lectures · 1hr 9min',
-    },
-    {
-      id: 'collapse12',
-      title: '23 General Copywriting Templates & Developing Copywriting Skills',
-      details: '3 lectures · 1hr 9min',
-    },
-    {
-      id: 'collapse13',
-      title: '23 General Copywriting Templates & Developing Copywriting Skills',
-      details: '3 lectures · 1hr 9min',
-    },
-    
-    
-  ];
+  courses:any = [];
 
   lessons = [
     {
@@ -103,81 +46,27 @@ export class SelectedcourseComponent implements OnInit {
       type: 'video',
       duration: "01:07",
     },
-    {
-      title: "What is React.js? And Why Would You Use It?",
-      type:'video',
-      duration: "02:58",
-    },
-    {
-      title: "ReactJS vs 'Vanilla JavaScript': Why Use React?",
-      type: 'video',
-      duration: "10:57",
-    },
-    {
-      title: "Editing Our First React App",
-      type: 'video',
-      duration: "04:22",
-    },
-    {
-      title: "About This Course & Course Outline",
-      type:'video',
-      duration: "02:55",
 
-    },
-    {
-      title: "The Two Ways (Paths) Of Taking This Course",
-      type: 'video',
-      duration: "03:08",
 
-    },
-    {
-      title: "Getting The Most Out Of This Course",
-      type: 'video',
-      duration: "05:24",
-
-    },
-    {
-      title: "Join our Online Learning Community",
-      type: 'video',
-      duration: "00:29",
-
-    },
-    {
-      title: "Creating React Projects",
-      type: 'pdf',
-      duration: "07:10",
-
-    },
-    {
-      title: "Why Do You Need A Special Project Setup?",
-      type: 'video',
-      duration: "02:51",
-
-    },
-    {
-      title: "Course Setup",
-      type: 'pdf',
-      duration: "00:32",
-
-    },
-    {
-      title: "Question Paper",
-      type: 'quetsion',
-      duration: "01:30",
-    },
-    {
-      title: "Course Setup",
-      type: 'assignment',
-      duration: "00:32",
-
-    },
   ];
   
 
-  constructor(private router:Router){}
+  constructor(private router:Router,private mainserve:MainService,private route:ActivatedRoute){}
 
-  ngOnInit(): void {
-      this.updateStars()
+  ngOnInit() {
+    this.id = localStorage.getItem('loginId') || '';
+    this.courseId = this.route.snapshot.paramMap.get('id');
+    console.log('Selected Course ID:', this.courseId);
+  
+    if (this.courseId) {
+      this.loadCourseDetails();
+      this.loadreview();
+      this.loadselectedcourse()
+      // this.loadreviewbyteacher();
+      // this.loadteacherdescription();
+    } else {
+      console.error('Course ID is null or undefined.');
+    }
   }
 
   get displayedCourses() {
@@ -205,8 +94,68 @@ export class SelectedcourseComponent implements OnInit {
   buyNow() {
   }
 
+  loadCourseDetails() {
+    this.mainserve.viewcourseid(this.courseId).subscribe(
+      (res: any) => {
+        if (res) {
+          this.selectedcourse = res;
+          console.log('Course Details:', this.selectedcourse);
+  
+          // Ensure the teacher ID is available for further calls
+          if (!this.selectedcourse.teacher) {
+            console.warn('Teacher ID is missing in the course details.');
+          }
+        } else {
+          console.warn('No course data found.');
+        }
+      },
+      (error) => {
+        console.error('Error fetching course details:', error);
+      }
+    );
+  }
+
+  loadselectedcourse() {
+    this.mainserve.sectionbycourseid(this.courseId).subscribe((res:any)=>{
+      this.courses=res
+      console.log('Course Details:', this.courses);
+    })
+  }
+
+
+  // loadteacherdescription() {
+  //   if (this.selectedcourse.teacher) {
+  //     this.mainserve.viewtaecherdescription(this.selectedcourse.teacher).subscribe(
+  //       (res: any) => {
+  //         this.teacher = res;
+  //         console.log('Teacher Details:', this.teacher);
+  //       },
+  //       (error) => {
+  //         console.error('Error fetching teacher details:', error);
+  //       }
+  //     );
+  //   } else {
+  //     console.warn('No teacher ID found in the selected course.');
+  //   }
+  // }
+
   addToCart() {
-    alert('Item added to cart!');
+    
+    const cart={
+      'course':this.courseId,
+      'user':this.id }
+    this.mainserve.addcart(cart).subscribe((res:any)=>{
+      alert("added succesfully")
+    },
+    (error: any) => {
+      if (error.status === 400 && error.error.message === 'Course is already in the cart') {
+        alert("Course is already in the cart");
+      } else {
+        console.error("Failed to add course to cart:", error);
+        alert("An error occurred while adding the course to the cart");
+      }
+    }
+  )
   }
 
   toVideo(){
@@ -253,6 +202,60 @@ export class SelectedcourseComponent implements OnInit {
   openPdf() {
     window.open(this.file, '_blank'); // Opens PDF in a new tab
   }
+
+
+
+
+  loadreview(){
+    this.mainserve.viewreviewbyid(this.courseId).subscribe((res:any)=>{
+
+   
+    this.reviews = res;
+    this.totalReviews = this.reviews.length;
+
+    if (this.totalReviews > 0) {
+      const totalRating = this.reviews.reduce((sum, review) => sum + review.rating, 0);
+      this.averageRating = totalRating / this.totalReviews;
+    } else {
+      this.averageRating = 0;
+    }
+
+    console.log('Reviews:', this.reviews);
+    console.log(`Average Rating: ${this.averageRating}, Total Reviews: ${this.totalReviews}`);
+  })}
+
+  teachertotalreview:number=0
+  averageteacherrating:number=0
+
+  // loadreviewbyteacher() {
+  //   if (this.selectedcourse.teacher) {
+  //     this.mainserve.viewreviewbyteacherid(this.selectedcourse.teacher).subscribe(
+  //       (res: any) => {
+  //         this.teacherreviews = res;
+  //         this.teachertotalreview = this.teacherreviews.length;
+  
+  //         if (this.teachertotalreview > 0) {
+  //           const totalRating = this.teacherreviews.reduce((sum, review) => sum + review.rating, 0);
+  //           this.averageteacherrating = totalRating / this.teachertotalreview;
+  //         } else {
+  //           this.averageteacherrating = 0;
+  //         }
+  
+  //         console.log('Teacher Reviews:', this.teacherreviews);
+  //         console.log(`Teacher Average Rating: ${this.averageteacherrating}, Total Reviews: ${this.teachertotalreview}`);
+  //       },
+  //       (error) => {
+  //         console.error('Error fetching teacher reviews:', error);
+  //       }
+  //     );
+  //   } else {
+  //     console.warn('No teacher ID found in the selected course.');
+  //   }
+  // }
+
+  
+
+
 }
 
   

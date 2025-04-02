@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MainService } from '../../service/main.service';
 
 @Component({
   selector: 'app-categoryview',
@@ -10,33 +11,22 @@ import { Router } from '@angular/router';
   styleUrl: './categoryview.component.css'
 })
 export class CategoryviewComponent implements OnInit{
-  list=[
-    {image:"/image/doc.jpg",category:'Data Sience'},
-    {image:"/image/doc.jpg",category:'Health Science'},
-    {image:"/image/doc.jpg",category:'Web development'},
-    {image:"/image/doc.jpg",category:'Flutter'},
-    {image:"/image/doc.jpg",category:'ML'},
-    {image:"/image/doc.jpg",category:'ML'},
-    {image:"/image/doc.jpg",category:'ML'},
-    {image:"/image/doc.jpg",category:'ML'},
-    {image:"/image/doc.jpg",category:'ML'},
-    {image:"/image/doc.jpg",category:'ML'},
-    {image:"/image/doc.jpg",category:'ML'},
-
-
-  ]
+  list:any=[ ]
 
   groupedList:any[][]=[]
 
-  constructor(private router:Router){}
+  constructor(private router:Router,private mains:MainService ){}
 
   ngOnInit(): void {
+    this.loadcategory()
       this.groupitems(6)
+      console.log('Category List:', this.list); // Debugging
+
 
   }
 
-  gocourse(){
-    this.router.navigate(['category'])
+  gocourse(categoryId:string){
+    this.router.navigate(['category'],{ queryParams: { category: categoryId } })
   }
   groupitems(chunksize:number){
     for(let i=0;i<this.list.length;i+=chunksize){
@@ -44,4 +34,14 @@ export class CategoryviewComponent implements OnInit{
     }
 
   }
+
+  loadcategory(){
+    this.mains.viewcategory().subscribe((res:any)=>{
+      this.list=res
+      this.groupitems(6); // Group items after the list is populated
+
+    })
+  }
+
+  
 }

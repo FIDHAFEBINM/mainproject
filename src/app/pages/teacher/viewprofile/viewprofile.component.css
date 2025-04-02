@@ -36,6 +36,10 @@
     font-size: 1.1em;
     margin-bottom: 20px;
     line-height: 1.6;
+    white-space: normal;  /* Ensures the text wraps */
+    word-wrap: break-word; /* Breaks long words if necessary */
+    overflow-wrap: break-word; /* Ensures consistent word breaking */
+    max-width: 100%; 
   }
   
   h3 {

@@ -12,17 +12,17 @@
       <a *ngFor="let category of courseCategories" href="#" class="text-secondary courses" [routerLink]="['/course']" routerLinkActive="router-link-active" >
         {{ category.name }}
       </a>
-    </div>
+    </div> 
   </div>
   <div class="container-fluid sm">
-  <app-courses  [cards]='card2'></app-courses></div>
+  <app-courses></app-courses></div>
   <app-displayreviewfirst></app-displayreviewfirst>  
 
-  <div class="container-fluid bg-white pt-2">
+  <!-- <div class="container-fluid bg-white pt-2">
     <h3 class="fs-3" style="margin-left: 120px;">Top Searches</h3>
-  </div>
-  <div class="container-fluid">
-  <app-courses [cards]='card1'></app-courses></div>
+  </div> -->
+  <!-- <div class="container-fluid">
+  <app-courses [cards]='card1'></app-courses></div> -->
 
   <!-- <div class="plans-container">
     <div *ngFor="let plan of plans" class="plan-item" [ngClass]="{ 'recommended': plan.recommended }">

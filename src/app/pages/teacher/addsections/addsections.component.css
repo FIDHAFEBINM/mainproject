@@ -1,0 +1,46 @@
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .card {
+    transition: 0.3s;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    background: #f8f9fa;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    transition: 0.3s;
+  }
+  
+  .card-header:hover {
+    background: #e9ecef;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .add-section-form {
+    background: #f1f1f1;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 10px;
+  }
+  
+  button {
+    transition: 0.3s;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  

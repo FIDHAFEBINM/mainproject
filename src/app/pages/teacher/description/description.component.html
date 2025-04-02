@@ -1,16 +1,22 @@
 <div class="container mt-4">
-    <h3>About you</h3>
-    <form #teacherForm="ngForm" (ngSubmit)="onSubmit(teacherForm)">
-      <!-- Other form fields -->
-  
-      <!-- Teacher's Description -->
-      <div class="mb-3">
-        <label for="teacherDescription" class="form-label">Upto 200 words</label>
-        <textarea class="form-control" id="teacherDescription" name="teacherDescription" rows="10" ngModel></textarea>
+  <h3>About You</h3>
+
+  <form [formGroup]="descriptionForm" (ngSubmit)="onSubmit()">
+    <!-- Teacher's Description -->
+    <div class="mb-3">
+      <label for="teacherDescription" class="form-label">Up to 600 words</label>
+      <textarea class="form-control" id="teacherDescription" formControlName="description" rows="10">
+      </textarea>
+      <div *ngIf="descriptionForm.get('description')?.invalid && descriptionForm.get('description')?.touched"
+        class="text-danger">
+        Description is required and must be less than 600 words.
       </div>
-  
-      <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary" [disabled]="!teacherForm.valid">Submit</button>
-    </form>
-  </div>
-  
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">
+      {{ isEditMode ? 'Update Description' : 'Add Description' }}
+
+    </button>
+  </form>
+</div>

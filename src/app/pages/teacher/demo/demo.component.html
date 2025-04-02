@@ -12,9 +12,9 @@
             <div class="sub1">
                 <a class="link" (click)="hideAllExcept('description')">Profile Description</a>
             </div>
-            <div class="sub1">
+            <!-- <div class="sub1">
                 <a class="link" (click)="hideAllExcept('account')">Account Details</a>
-            </div>
+            </div> -->
             <!-- <div class="sub1">
                 <a class="link">Course details</a>
             </div> -->
@@ -33,7 +33,7 @@
         <app-viewprofile [hidden]="!showViewProfile"  ></app-viewprofile>
         <app-teacherprofile  [hidden]="!showTeacherProfile"></app-teacherprofile>
         <app-description  [hidden]="!showDescription"></app-description>
-        <app-accoumtdetails [hidden]="!accountdetails"></app-accoumtdetails>
+        <!-- <app-accoumtdetails [hidden]="!accountdetails"></app-accoumtdetails> -->
         <app-report [hidden]="!course"></app-report>
         <!-- <app-teachermonthlyreport [hidden]="!report"></app-teachermonthlyreport> -->
     </div>

@@ -3,46 +3,64 @@
       <div class="mains d-flex justify-content-between">
         
         <div class="profile-header">
-          <img [src]="profileData.profilePicture" alt="Profile Picture" class="profile-image" />
-          <h2 class="profile-name">{{ profileData.name }}</h2>
+          <img  [src]="'http://localhost:3000/uploads/'+profileData.profileImage" alt="Profile Picture" class="profile-image" />
+          <h2 class="profile-name">{{ profileData.user.username }}</h2>
         </div>
         
         <div class="d-flex justify-content-center">
           <div class="premium-box ">
-          
+           
       
               <!-- Rating Section -->
-              <div class="text-center px-3">
-                  <h5 class="fw-bold">{{ rating }}</h5>
-                  <div class="rating-stars">
-                      <i *ngFor="let star of getFullStars(rating)" class="fa fa-star text-warning"></i>
-                      <i *ngIf="hasHalfStar(rating)" class="fa fa-star-half-alt text-warning"></i>
-                      <i *ngFor="let star of getEmptyStars(rating)" class="fa fa-star text-secondary"></i>
+              <div class="d-flex justify-content-center">
+                <div class="premium-box">
+                  <div class="text-center px-3">
+                    <h5 class="fw-bold">{{ averageteacherrating | number: '1.1-1' }}</h5>
+                    <div class="rating-stars">
+                      <i
+                        *ngFor="let star of getFullStars(averageteacherrating)"
+                        class="fa fa-star text-warning"
+                      ></i>
+                      <i
+                        *ngIf="hasHalfStar(averageteacherrating)"
+                        class="fa fa-star-half-alt text-warning"
+                      ></i>
+                      <i
+                        *ngFor="let star of getEmptyStars(averageteacherrating)"
+                        class="fa fa-star text-secondary"
+                      ></i>
+                    </div>
+                    <a href="#" class="small text-muted">{{ teachertotalreview }} ratings</a>
                   </div>
-                  <a href="#" class="small text-muted">{{ totalRatings }} ratings</a>
+                </div>
               </div>
+            
       
               <!-- Learners Count -->
-              <div class="text-center px-3">
+              <!-- <div class="text-center px-3">
                   <h5 class="fw-bold"><i class="fa fa-users"></i> {{ learners | number }}</h5>
                   <p class="small text-muted">learners</p>
-              </div>
+              </div> -->
           </div>
       </div>
       </div>
-      
-        <p class="profile-description">{{ profileData.description }}</p>
+       
+        <p class="profile-description">{{ description.description}}</p>
       
         <!-- <h3>About the Teacher</h3>
         <p class="profile-about">{{ profileData.about }}</p> -->
       
         <h3>Courses Offered</h3>
         <ul class="course-list">
-          <li *ngFor="let course of profileData.courses">{{ course }}</li>
+          <li>{{ profileData.subject }}</li>
+        </ul>
+        <h3>Qualification</h3>
+        <ul class="course-list">
+          <li>{{ profileData.qualification }}</li>
         </ul>
       
         <h3>Contact</h3>
-        <p>Email: <a [href]="'mailto:' + profileData.contactEmail">{{ profileData.contactEmail }}</a></p>     
+        <p>Email: <a [href]="'mailto:' + profileData.contactEmail">{{ profileData.user.email }}</a></p>     
       
       </div>  
       

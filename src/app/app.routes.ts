@@ -26,7 +26,6 @@ import { AllcourseComponent } from './pages/website/allcourse/allcourse.componen
 import { ViewteachercourseadminComponent } from './pages/Admin/viewteachercourseadmin/viewteachercourseadmin.component';
 import { PdfViewerComponent } from './pdf-viewer/pdf-viewer.component';
 import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.component';
-import { ViewcourseComponent } from './pages/teacher/viewcourse/viewcourse.component';
 import { ViewcoursesComponent } from './pages/Admin/viewcourses/viewcourses.component';
 import { AdminviewusersComponent } from './pages/Admin/adminviewusers/adminviewusers.component';
 import { AdminreportsComponent } from './pages/Admin/adminreports/adminreports.component';
@@ -57,7 +56,7 @@ export const routes: Routes = [
                 ]
             },
             {
-                path:'selectedcourse',
+                path:'selectedcourse/:id',
                 component:SelectedcourseComponent
             },
      

@@ -8,16 +8,14 @@
 </div> -->
 
 <div class="container-fluid">
-  <div class="sub1" style="width:25%">
+  <!-- <div class="sub1" style="width:25%">
     <div class="container pt-5" >
   <div class="list-group">
-    <!-- Loop through each section (e.g., weeks) -->
     <div *ngFor="let week of courseOutline">
       <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="collapse" [attr.data-bs-target]="'#' + week.id">
         {{ week.title }}
       </a>
       <div [id]="week.id" class="collapse">
-        <!-- Loop through each item in the week -->
         <a *ngFor="let item of week.items" href="#" class="list-group-item list-group-item-action ps-4">
           {{ item }}
         </a>
@@ -25,9 +23,8 @@
     </div>
   </div>
 </div>
- 
-  </div>
-  <div class="sub2" style="width:70%">
+  </div> -->
+  <div class="sub2" style="width:100%">
 <div class="container mt-3">
     <div>
         <iframe width="100%" height="500" 

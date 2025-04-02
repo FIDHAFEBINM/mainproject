@@ -3,7 +3,7 @@
         <div class="col-md-4 mt-3" *ngFor="let review of reviews.slice(0,6)" >
             <div class="card shadow-sm">
                 <div class="card-header fw-bold text-primary">
-                    {{ review.name }}
+                    {{ review.user.username }}
                 </div>
                 <div class="card-body text-center">
                     <!-- Dynamic Star Rating -->
@@ -15,7 +15,7 @@
 
                     <!-- Description -->
                     <p class="mt-2 text-muted">
-                        "{{ review.comment }}"
+                        "{{ review.review }}" 
                     </p>
                 </div>
             </div>

@@ -1,0 +1,54 @@
+<div class="card mt-3">
+    <div class="card-header">
+        <h5>Add Assignment</h5>
+    </div>
+    <div class="card-body">
+        <form (ngSubmit)="submitAssignment()" #assignmentForm="ngForm">
+            <!-- Title -->
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" class="form-control" [(ngModel)]="assignment.title" name="title"
+                    required />
+            </div>
+
+            <!-- Description -->
+            <!-- <div class="form-group mt-2">
+                <label for="description">Description:</label>
+                <textarea id="description" class="form-control" [(ngModel)]="assignment.description" name="description"
+                    required></textarea>
+            </div> -->
+
+            <!-- Question -->
+            <div class="form-group mt-2">
+                <label for="question">Question:</label>
+                <input type="text" id="question" class="form-control" [(ngModel)]="assignment.question" name="question"
+                    required />
+            </div>
+
+            <!-- Teacher Answer -->
+            <div class="form-group mt-2">
+                <label for="teacherAnswer">Teacher's Answer:</label>
+                <textarea id="teacherAnswer" class="form-control" [(ngModel)]="assignment.teacherAnswer"
+                    name="teacherAnswer" required></textarea>
+            </div>
+
+            <!-- File Upload -->
+            <!-- <div class="form-group mt-2">
+                <label for="file">Upload File:</label>
+                <input type="file" id="file" class="form-control" (change)="onFileChange($event)" />
+            </div> -->
+
+            <!-- Due Date -->
+            <div class="form-group mt-2">
+                <label for="dueDate">Due Date:</label>
+                <input type="date" id="dueDate" class="form-control" [(ngModel)]="assignment.dueDate" name="dueDate"
+                    required />
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary mt-3" [disabled]="!assignmentForm.form.valid">
+                Submit Assignment
+            </button>
+        </form>
+    </div>
+</div>

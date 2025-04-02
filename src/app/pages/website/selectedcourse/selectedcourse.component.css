@@ -10,7 +10,7 @@
     padding: 15px;
     max-width: 800px;
 }
-.premium-badge {
+/* .premium-badge {
     background: #5726C2;
     color: white;
     font-weight: bold;
@@ -23,7 +23,7 @@
 }
 .premium-badge i {
     font-size: 24px;
-}
+} */
 .rating-stars i {
     color: #f4b400;
 }
@@ -72,5 +72,19 @@
   
   .lesson-duration {
     color: #555;
+  }
+  .about-text {
+    text-align: justify; /* Align text to both left and right edges */
+    line-height: 1.6; /* Improve readability with proper line spacing */
+    font-size: 1rem; /* Adjust font size for better readability */
+    color: #333; /* Set a neutral text color */
+    padding: 10px; /* Add padding around the text */
+    word-wrap: break-word; /* Ensure long words break to the next line */
+    overflow-wrap: break-word; /* Break long words to prevent overflow */
+    
+  }
+  .teacherdescribe{
+    word-wrap: break-word; /* Ensure long words break to the next line */
+    overflow-wrap: break-word;
   }
   

@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AdminlandingComponent {
   sections = [
-    { key: 'adminlandingcontent', label: 'Dashboard' },
+    { key: 'adminlandingcontent', label: 'Dashboard' }, 
     { key: 'adminviewteachercourses', label: 'Manage Teachers' },
     { key: 'adminviewusers', label: 'Manage Users' },
     // { key: 'adminviewcourses', label: 'Manage Courses' },

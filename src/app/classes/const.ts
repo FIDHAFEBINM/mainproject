@@ -26,3 +26,36 @@ export class Register{
     }
 
 }
+
+export interface Video {
+    title: string;
+    file: File | null;
+  }
+  
+  export interface Pdf {
+    title: string;
+    file: File | null;
+  }
+  
+  export interface Assignment {
+    topic: string;
+    answers: string;
+  }
+  
+  export interface Section {
+    _id?: string;
+    course: string;
+    name: string;
+    videos: Video[];
+    pdfs: Pdf[];
+    assignments?: Assignment[];
+    showQuiz?: boolean;
+    showAssignment?: boolean;
+    videoTitle?: string;
+    videoFile?: File |null;
+    pdfTitle?: string;
+    pdfFile?: File | null;
+    assignmentTopic?: string;
+    assignmentAnswers?: string;
+  }
+  

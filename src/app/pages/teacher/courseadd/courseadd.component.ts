@@ -6,11 +6,12 @@ import { PricingComponent } from "../pricing/pricing.component";
 import { ViewcourseComponent } from "../viewcourse/viewcourse.component";
 import { RouterOutlet } from '@angular/router';
 import { ViewpaymentteacherComponent } from "../viewpaymentteacher/viewpaymentteacher.component";
+import { AddsectionsComponent } from '../addsections/addsections.component';
 
 @Component({
   selector: 'app-courseadd',
   standalone: true,
-  imports: [ChoosecategoryComponent, CommonModule, AddsectionComponent, PricingComponent, ViewcourseComponent, ViewpaymentteacherComponent],
+  imports: [ChoosecategoryComponent, CommonModule,AddsectionsComponent, PricingComponent, ViewcourseComponent, ViewpaymentteacherComponent],
   templateUrl: './courseadd.component.html',
   styleUrl: './courseadd.component.css'
 })

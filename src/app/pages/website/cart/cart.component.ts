@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterComponent } from '../../register/register.component';
+import { MainService } from '../../../service/main.service';
 
 @Component({
   selector: 'app-cart',
@@ -10,23 +11,22 @@ import { RegisterComponent } from '../../register/register.component';
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
 
   currentPage: number = 1;
   itemsPerPage: number = 10;
   custid:string | null=null
     @ViewChild('registerModel') registerModel !: RegisterComponent;
+  id=''
   
-  cards= [{
-    name: 'John Doe',
-    title: 'Architect and Engineer',
-    description: 'Some example text some example text. John Doe is an architect and engineer.',
-    imageUrl: '/image/doc.jpg',
-    profileLink: '#',
-    price:300
-  }]
+  cards:any= []
 
-  constructor(private router:Router){}
+  constructor(private router:Router,private mainserve:MainService){}
+
+  ngOnInit(): void {
+    this.id = localStorage.getItem('loginId') || '';
+    this.loadcart()
+  }
 
   get paginatedCards() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
@@ -64,6 +64,19 @@ export class CartComponent {
     } else {
       alert("Buy successfully");
     }
+  }
+
+  loadcart(){
+    this.mainserve.viewcart(this.id).subscribe((res:any)=>{
+      this.cards=res
+    })
+  }
+
+  delete(card:string){
+    this.mainserve.deletecart(card).subscribe((res:any)=>{
+      alert("deleted succesfully")
+    })
+    this.loadcart()
   }
   
 

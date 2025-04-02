@@ -70,26 +70,28 @@
         <app-categoryview></app-categoryview> -->
   
         <!-- Course Cards Loop -->
-        <div *ngFor="let card of paginatedCards" class="card mt-3" style="width: 100%;" (click)="goToSelected()">
+        <div *ngFor="let card of paginatedCards" class="card mt-3" style="width: 100%;height: auto;" (click)="goToSelected(card._id)">
           <div class="row no-gutters">
             <div class="col-3 d-flex align-items-center">
-              <img class="card-img-left img-fluid" [src]="card.imageUrl" alt="Card image">
+              <img class="card-img-left img-fluid"  [src]="'http://localhost:3000/uploads/'+card.previewimage" alt="Card image" style="max-height:100%; object-fit: cover;width: 200px;">
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h4 class="card-title">{{ card.name }}</h4>
-                <p class="card-text">{{ card.description }}</p>
+                <h4 class="card-title">{{ card.topic }}</h4>
+                <p class="card-text">{{ card.subcategory.subcategory }}</p>
+                <p class="card-text fw-bold">{{ card.price.price | currency:'INR'  }}</p>
+
                 
-                <!-- Rating Section -->
+                <!-- Rating Section -->  
                 <div class="rating-stars">
-                  <i *ngFor="let star of getFullStars(rating)" class="fa fa-star text-warning"></i>
-                  <i *ngIf="hasHalfStar(rating)" class="fa fa-star-half-alt text-warning"></i>
-                  <i *ngFor="let star of getEmptyStars(rating)" class="fa fa-star text-secondary"></i>
+                  <i *ngFor="let star of getFullStars(card.rating || 0)" class="fa fa-star text-warning"></i>
+                  <i *ngIf="hasHalfStar(card.rating || 0)" class="fa fa-star-half-alt text-warning"></i>
+                  <i *ngFor="let star of getEmptyStars(card.rating || 0)" class="fa fa-star text-secondary"></i>
                 </div>
   
                 <!-- Action Buttons -->
-                <button class="btn btn-primary mt-3" (click)="goToCart()"> Add to Cart</button>
-                <button class="btn btn-outline-primary mx-3 mt-3" (click)="goToCart()"> Buy Course</button>
+                <button class="btn btn-primary mt-3" (click)="goToCart(card._id)"> Add to Cart</button>
+                <button class="btn btn-outline-primary mx-3 mt-3" (click)="goToCart(card._id)"> Buy Course</button>
               </div>
             </div>
           </div>

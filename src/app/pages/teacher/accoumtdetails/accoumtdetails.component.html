@@ -1,1 +1,41 @@
-<p>accoumtdetails works!</p>
+<div class="container mt-4">
+    <h3>Teacher Profile Details</h3>
+
+    <form [formGroup]="accountForm" (ngSubmit)="submitForm()" >
+      
+      <div class="mb-3">
+        <label class="form-label">Account Holder Name</label>
+        <input type="text" class="form-control" formControlName="accountHolder" />
+        <div *ngIf="accountForm.controls['accountHolder'].invalid && accountForm.controls['accountHolder'].touched" class="text-danger">
+          Name is required (Min: 3 characters).
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Account Number</label>
+        <input type="text" class="form-control" formControlName="accountNumber" />
+        <div *ngIf="accountForm.controls['accountNumber'].invalid && accountForm.controls['accountNumber'].touched" class="text-danger">
+          Enter a valid 9-18 digit account number.
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">IFSC Code</label>
+        <input type="text" class="form-control" formControlName="ifscCode" />
+        <div *ngIf="accountForm.controls['ifscCode'].invalid && accountForm.controls['ifscCode'].touched" class="text-danger">
+          Enter a valid IFSC code (e.g., SBIN0001234).
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Bank Name</label>
+        <input type="text" class="form-control" formControlName="bankName" />
+        <div *ngIf="accountForm.controls['bankName'].invalid && accountForm.controls['bankName'].touched" class="text-danger">
+          Bank name is required.
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary w-100">Submit</button>
+    </form>
+  </div>
+  

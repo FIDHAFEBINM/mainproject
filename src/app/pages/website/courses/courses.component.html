@@ -43,23 +43,28 @@
         </div> -->
 
         <div class="card-grid">
-          <div class="card-item" *ngFor="let card of cardSet" (click)="goToSelected()">
+          <div class="card-item" *ngFor="let card of cardSet" (click)="goToSelected(card._id)">
             <div class="custom-card card">
-              <img [src]="card.image" class="card-img-top" [alt]="card.title" />
+              <img [src]="'http://localhost:3000/uploads/'+card.previewimage" class="card-img-top" [alt]="card.title" />
               <div class="card-body text-center">
-                <h5 class="card-title">{{ card.title }}</h5>
-                <p class="card-text">{{ card.description }}</p>
-                <p class="card-text fw-bold">{{ card.price | currency:'INR'  }}</p>
+                <h5 class="card-title">{{ card.topic }}</h5>
+                <p class="card-text">{{ card.subcategory.subcategory }}</p>
+                <p class="card-text fw-bold">{{ card.price.price | currency:'INR'  }}</p>
     
                 <!-- Display stars for rating -->
                 <div class="star-rating">
-                  <ng-container *ngFor="let filled of getStarArray(card.rating)">
-                    <i class="star" [class.filled]="filled">★</i>
+                  <ng-container *ngIf="card.rating !== undefined && card.rating !== null; else noRating">
+                    <ng-container *ngFor="let filled of getStarArray(card.rating)">
+                      <i class="star" [class.filled]="filled">★</i>
+                    </ng-container>
+                    <span class="rating-value">({{ card.rating.toFixed(1) }})</span>
                   </ng-container>
-                  <span class="rating-value">({{ card.rating }})</span>
+                  <ng-template #noRating>
+                    <p>No ratings yet</p>
+                  </ng-template>
                 </div>
-    
-                <p class="card-text">   <i class="fa fa-users"></i>{{ card.learners }} learners enrolled </p>
+     
+                <!-- <p class="card-text">   <i class="fa fa-users"></i>{{ card.learners }} learners enrolled </p> -->
               </div>
             </div>
           </div>

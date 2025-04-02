@@ -1,17 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { QuestionpaperComponent } from "../questionpaper/questionpaper.component";
+import { MainService } from '../../../service/main.service';
 
 
 @Component({
   selector: 'app-addsection',
   standalone: true,
-  imports: [FormsModule, CommonModule, QuestionpaperComponent],
+  imports: [FormsModule, CommonModule,QuestionpaperComponent],
   templateUrl: './addsection.component.html',
   styleUrl: './addsection.component.css'
 })
-export class AddsectionComponent {
+export class AddsectionComponent implements OnInit {
   // titles: string[] = ['Title 1', 'Title 2', 'Title 3'];
   // selectedTitle: string = '';
   // sectionName: string = '';
@@ -64,28 +65,65 @@ export class AddsectionComponent {
   //     console.log('Please fill in all fields.');
   //   }
   // }
+  course:any[]=[]
 
   sections: any[] = [];
   hide:boolean=true
+  id:any=''
 
-  sectionName: string = '';
+  section: string = '';
 
-  constructor() {}
+  sectionses:any={
+    section:'',
+    course:''
+  }
+
+  constructor(private mainserve:MainService) {}
+
+  ngOnInit(): void {
+      this.id=localStorage.getItem('loginId') || ''
+      this.oncoursechange()
+  }
 
   // Add a new section
+  // addSection() {
+  //   if (this.sectionName) {
+  //     this.sections.push({
+  //       name: this.sectionName,
+  //       videoTitle: '',
+  //       pdfTitle: '',
+  //       videoFile: null,
+  //       pdfFile: null,
+  //       showQuiz:false
+  //     });
+  //     this.sectionName = ''; // Clear the input fields
+  //   }
+  // }
+
   addSection() {
-    if (this.sectionName) {
-      this.sections.push({
-        name: this.sectionName,
-        videoTitle: '',
-        pdfTitle: '',
-        videoFile: null,
-        pdfFile: null,
-        showQuiz:false
+    console.log(this.sectionses)
+    if (this.sectionses) {  // Ensure course and section are selected
+  
+      this.mainserve.addsection(this.sectionses).subscribe((res: any) => {
+        alert("Section added");
+        this.sections.push({
+          name: this.section,
+          course: this.sectionses.course,    // Include the course ID
+          videoTitle: '',
+          pdfTitle: '',
+          videoFile: null,
+          pdfFile: null,
+          showQuiz: false
+        });
+        this.section = '';    // Clear section input
       });
-      this.sectionName = ''; // Clear the input fields
+    } else {
+      alert('Please select a course and enter a section name.');
     }
   }
+
+  
+  
 
   // Handle video file selection
   onFileChange(event: any, section: any, fileType: string) {
@@ -102,6 +140,7 @@ export class AddsectionComponent {
   // Add video to the section
   addVideoToSection(section: any, index: number) {
     if (section.videoTitle && section.videoFile) {
+      
       section.videos = section.videos || [];
       section.videos.push({
         title: section.videoTitle,
@@ -111,6 +150,42 @@ export class AddsectionComponent {
       section.videoFile = null; // Reset video file field
     }
   }
+  // addVideoToSection(section: any, index: number) {
+  //   if (section.videoTitle && section.videoFile) {
+  
+  //     section.videos = section.videos || [];
+  //     section.videos.push({
+  //       title: section.videoTitle,
+  //       file: section.videoFile.name  // Save the file name, not the file object
+  //     });
+  
+  //     // Prepare FormData with correct file handling
+  //     const formData = new FormData();
+  //   formData.append('section', section._id);    // Use section ID from backend
+  //   formData.append('videoName', section.videoTitle); 
+  //   formData.append('video', section.videoFile);  // Append the actual file
+  //   formData.append('type', 'video');
+  //     // Debug: log form data entries
+  //     // for (let pair of formData.entries()) {
+  //     //   console.log(pair[0], pair[1]);
+  //     // }
+  //     console.log(formData)
+
+  
+  //     this.mainserve.addvideo(formData).subscribe(
+  //       (res: any) => {
+  //         alert('Video added successfully');
+  //         section.videoTitle = '';     // Reset video title
+  //         section.videoFile = null;    // Reset video file
+  //       }
+  //     );
+  //   } else {
+  //     alert('Please fill in both the video title and select a file.');
+  //   }
+  // }
+  
+
+
 
   // Add PDF to the section
   addPdfToSection(section: any, index: number) {
@@ -143,7 +218,10 @@ export class AddsectionComponent {
 
   toggleQuiz(index: number) {
     this.sections[index].showQuiz = !this.sections[index].showQuiz;
-  }
+
+    // Ensure the sectionId is passed to the child component
+    this.sections[index].sectionId = this.sections[index]._id; 
+    }
 
   // Save all sections
   saveAllSections() {
@@ -152,5 +230,12 @@ export class AddsectionComponent {
   }
  AddQuestionpaper(){
   this.hide=!this.hide
+ }
+
+ oncoursechange(){
+  this.mainserve.viewcoursebyid(this.id).subscribe((res:any)=>{
+    this.course=res
+  })
+
  }
 }

@@ -14,7 +14,12 @@ import { FormsModule } from '@angular/forms';
 })
 export class LandingComponent {
 
+  searchQuery: string = '';
+
   islandingcomponent:boolean=false
+  selectedRole: string = '';
+  student='student'
+
   @ViewChild('registerModel') registerModel !: RegisterComponent;
   categories = [
     {
@@ -35,7 +40,6 @@ export class LandingComponent {
     }
   ];
 
-  searchQuery: string = '';
 
 
   constructor(private router:Router,private route:ActivatedRoute){}
@@ -45,17 +49,19 @@ export class LandingComponent {
       this.islandingcomponent = this.router.url === '/landing';
     });
   }
-
   search() {
-    if (this.searchQuery.trim().toLowerCase()) {
-      this.router.navigate(['/category'], { queryParams: { search: this.searchQuery } });
+    if (this.searchQuery.trim()) {
+      console.log('Navigating with search query:', this.searchQuery); // Debugging log
+      this.router.navigate(['/category'], { queryParams: { search: this.searchQuery.trim() } });
+    } else {
+      alert('Please enter a search term.');
     }
   }
 
 
   openRegisterModel(){
     if(this.registerModel){
-      this.registerModel.showModal=true
+      this.registerModel.showModal=true 
     }
   }
 

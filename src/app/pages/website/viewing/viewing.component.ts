@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component,OnInit} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CoursesComponent } from "../courses/courses.component";
 import { DisplayreviewfirstComponent } from "../../displayreviewfirst/displayreviewfirst.component";
@@ -11,8 +11,14 @@ import { DisplayreviewfirstComponent } from "../../displayreviewfirst/displayrev
   templateUrl: './viewing.component.html',
   styleUrl: './viewing.component.css'
 })
-export class ViewingComponent {
+export class ViewingComponent implements OnInit {
 
+  id:string=''
+  ngOnInit(): void {
+    this.id = localStorage.getItem('loginId') || '';
+    console.log(this.id)
+
+  }
   courseCategories = [
     { name: 'Design' },
     { name: 'Data Science' },
