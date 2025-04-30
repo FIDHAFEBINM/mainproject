@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component,OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MainService } from '../../../service/main.service';
 
 @Component({
   selector: 'app-viewcourses',
@@ -9,30 +10,51 @@ import { Router } from '@angular/router';
   templateUrl: './viewcourses.component.html',
   styleUrl: './viewcourses.component.css'
 })
-export class ViewcoursesComponent {
-  teacherCourses = [
-    {
-      title: 'Angular Basics',
-      description: 'Learn the basics of Angular framework.',
-      duration: '6 Weeks',
-      rating: 4,
-      image: 'https://via.placeholder.com/150'
-    },
-    {
-      title: 'Advanced JavaScript',
-      description: 'Deep dive into modern JavaScript.',
-      duration: '8 Weeks',
-      rating: 5,
-      image: 'https://via.placeholder.com/150'
-    },
-    {
-      title: 'Bootstrap & UI Design',
-      description: 'Enhance UI with Bootstrap 5.',
-      duration: '4 Weeks',
-      rating: 3,
-      image: 'https://via.placeholder.com/150'
-    }
-  ];
+export class ViewcoursesComponent implements OnInit {
+
+  teacherId: string = '';
+  teacherCourses:any = [ ];
+
+  constructor(private route: ActivatedRoute, private mainService: MainService) {}
+
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.teacherId = params['id']; // Get the teacher ID from the route parameters
+    });
+    this.loadCoursesByTeacher();
+    
+  }
+
+  loadCoursesByTeacher(): void {
+    this.mainService.viewcoursebyid(this.teacherId).subscribe(
+      (res: any) => {
+        this.teacherCourses = res; // Store the courses
+      },
+      (error: any) => {
+        console.error('Error fetching courses:', error);
+        alert('Failed to load courses.');
+      }
+    );
+  }
+
+  loadReviewsForCourse(courseId: string): void {
+    this.mainService.viewreviewbyid(courseId).subscribe(
+      (res: any) => {
+        const course = this.teacherCourses.find((c:any) => c._id === courseId);
+        if (course) {
+          course.reviews = res; // Attach reviews to the course
+
+          // Calculate the average rating
+          const totalRating = res.reduce((sum: number, review: any) => sum + review.rating, 0);
+          course.averageRating = res.length > 0 ? totalRating / res.length : 0; // Average rating
+        }
+      },
+      (error) => {
+        console.error(`Error fetching reviews for course ${courseId}:`, error);
+      }
+    );
+  }
 
   getStars(rating: number): number[] {
     return Array(Math.floor(rating)).fill(0);

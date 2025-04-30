@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MainService } from '../../../service/main.service';
 
 @Component({
   selector: 'app-adminviewusers',
@@ -10,14 +11,14 @@ import { Router } from '@angular/router';
   templateUrl: './adminviewusers.component.html',
   styleUrl: './adminviewusers.component.css'
 })
-export class AdminviewusersComponent {
-  users = [
-    { id: 1, name: 'Alice Johnson', email: 'alice@example.com', role: 'Teacher', status: 'Active' },
-    { id: 2, name: 'Bob Smith', email: 'bob@example.com', role: 'Student', status: 'Inactive' },
-    { id: 3, name: 'Charlie Brown', email: 'charlie@example.com', role: 'Admin', status: 'Active' }
-  ];
+export class AdminviewusersComponent implements OnInit {
+  users:any = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private mainserve:MainService) {} 
+
+  ngOnInit(): void {
+      this.loaduser()
+  }
 
   viewUser(userId: number) {
     this.router.navigate(['/admin/user-details', userId]);
@@ -27,9 +28,15 @@ export class AdminviewusersComponent {
     this.router.navigate(['/admin/edit-user', userId]);
   }
 
-  deleteUser(userId: number) {
-    if (confirm('Are you sure you want to delete this user?')) {
-      this.users = this.users.filter(user => user.id !== userId);
-    }
+  loaduser(){
+    this.mainserve.loginget().subscribe((res:any)=>{
+      this.users=res
+    })
   }
+
+  // deleteUser(userId: number) {
+  //   if (confirm('Are you sure you want to delete this user?')) {
+  //     this.users = this.users.filter(user => user.id !== userId);
+  //   }
 }
+

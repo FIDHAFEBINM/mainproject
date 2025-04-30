@@ -2,11 +2,12 @@
     <h2>All Teachers</h2>
     <div class="teachers-grid">
       <div class="teacher-card" *ngFor="let teacher of teachers">
-        <img src="{{ teacher.profileImage }}" alt="{{ teacher.name }}">
-        <h5>{{ teacher.name }}</h5>
+        <!-- <img [src]="'http://localhost:3000/uploads/'+teacher.profileImage" alt="{{ teacher.user.username }}" class="teacher_image" > -->
+        <h5>{{ teacher.username }}</h5>
         <p>{{ teacher.email }}</p>
-        <p>Expertise: {{ teacher.expertise }}</p>
-        <button (click)="viewCourses()">View Courses</button>
+        <!-- <p>Expertise: {{ teacher.qualification }},{{teacher.experience}}years</p> -->
+        <button (click)="viewCourses(teacher._id)">View Courses</button>
       </div>
     </div>
   </div>
+ 

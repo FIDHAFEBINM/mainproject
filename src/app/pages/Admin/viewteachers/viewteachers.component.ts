@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrl: './viewteachers.component.css'
 })
 export class ViewteachersComponent {
-  teachers = [
+  teachers = [ 
     {
       name: 'Teacher 1',
       subject: 'Math',

@@ -1,3 +1,51 @@
+<!-- <div class="card mt-3">
+    <div class="card-header">
+        <h5>Add Assignment</h5>
+    </div>
+    <div class="card-body">
+        <form (ngSubmit)="submitAssignment()" #assignmentForm="ngForm">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" class="form-control" [(ngModel)]="assignment.title" name="title"
+                    required />
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="description">Description:</label>
+                <textarea id="description" class="form-control" [(ngModel)]="assignment.description" name="description"
+                    required></textarea>
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="question">Question:</label>
+                <input type="text" id="question" class="form-control" [(ngModel)]="assignment.question" name="question"
+                    required />
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="teacherAnswer">Teacher's Answer:</label>
+                <textarea id="teacherAnswer" class="form-control" [(ngModel)]="assignment.teacherAnswer"
+                    name="teacherAnswer" required></textarea>
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="file">Upload File:</label>
+                <input type="file" id="file" class="form-control" (change)="onFileChange($event)" />
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="dueDate">Due Date:</label>
+                <input type="date" id="dueDate" class="form-control" [(ngModel)]="assignment.dueDate" name="dueDate"
+                    required />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3" [disabled]="!assignmentForm.form.valid">
+                Submit Assignment
+            </button>
+        </form>
+    </div>
+</div> -->
+
 <div class="card mt-3">
     <div class="card-header">
         <h5>Add Assignment</h5>
@@ -10,13 +58,6 @@
                 <input type="text" id="title" class="form-control" [(ngModel)]="assignment.title" name="title"
                     required />
             </div>
-
-            <!-- Description -->
-            <!-- <div class="form-group mt-2">
-                <label for="description">Description:</label>
-                <textarea id="description" class="form-control" [(ngModel)]="assignment.description" name="description"
-                    required></textarea>
-            </div> -->
 
             <!-- Question -->
             <div class="form-group mt-2">
@@ -32,22 +73,21 @@
                     name="teacherAnswer" required></textarea>
             </div>
 
-            <!-- File Upload -->
-            <!-- <div class="form-group mt-2">
-                <label for="file">Upload File:</label>
-                <input type="file" id="file" class="form-control" (change)="onFileChange($event)" />
-            </div> -->
+            <!-- Viewed Status -->
+            <!-- <div class="form-group mt-2" *ngIf="assignment.viewed">
+            <label for="viewed">Viewed:</label>
+            <input type="checkbox" id="viewed" class="form-control" [checked]="assignment.viewed" disabled />
+          </div> -->
 
-            <!-- Due Date -->
-            <div class="form-group mt-2">
-                <label for="dueDate">Due Date:</label>
-                <input type="date" id="dueDate" class="form-control" [(ngModel)]="assignment.dueDate" name="dueDate"
-                    required />
-            </div>
 
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary mt-3" [disabled]="!assignmentForm.form.valid">
                 Submit Assignment
+            </button>
+
+            <!-- Delete Button -->
+            <button type="button" class="btn btn-danger mt-3 mx-2" *ngIf="ids" (click)="deleteAssignment(ids)">
+                Delete Assignment
             </button>
         </form>
     </div>

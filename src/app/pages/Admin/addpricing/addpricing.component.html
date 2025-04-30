@@ -1,0 +1,23 @@
+<div class="container mt-4">
+    <h2>Add New Price</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="priceInput" class="form-label">Price</label>
+        <input type="text" id="priceInput" class="form-control" [(ngModel)]="price" name="price" required>
+      </div>
+      <button class="btn btn-primary" type="submit">Add Price</button>
+    </form>
+  
+    <hr>
+  
+    <div class="pricing-list">
+        <h3>Pricing List</h3>
+        <ul>
+            <li *ngFor="let price of prices" class="d-flex align-items-center">
+                <span class="me-auto">{{ price?.price | currency: 'INR' }}</span>
+                <!-- <i class="fa fa-trash text-danger" (click)="deletePricing(price?._id)" style="cursor: pointer;"></i> -->
+            </li>
+        </ul>
+    </div>
+  </div>
+  

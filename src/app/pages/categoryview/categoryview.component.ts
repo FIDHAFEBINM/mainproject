@@ -19,7 +19,7 @@ export class CategoryviewComponent implements OnInit{
 
   ngOnInit(): void {
     this.loadcategory()
-      this.groupitems(6)
+      // this.groupitems(6)
       console.log('Category List:', this.list); // Debugging
 
 
@@ -35,12 +35,17 @@ export class CategoryviewComponent implements OnInit{
 
   }
 
-  loadcategory(){
-    this.mains.viewcategory().subscribe((res:any)=>{
-      this.list=res
-      this.groupitems(6); // Group items after the list is populated
-
-    })
+  loadcategory() {
+    this.mains.viewcategories().subscribe((res: any) => {
+      this.list = res;
+  
+      // Reset previous grouped list (important if reloading)
+      this.groupedList = [];
+  
+      // Now group the fresh list
+      this.groupitems(6);
+      console.log('Category List:', this.list); // for verification
+    });
   }
 
   

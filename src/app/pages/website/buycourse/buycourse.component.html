@@ -1,0 +1,25 @@
+<div class="container mt-4">
+    <h2>Buy Course</h2>
+    <p>Proceed with your course purchase here.</p>
+    <!-- Add your course purchase logic -->
+  </div>
+
+  <div class="container mt-4">
+    <h3>Buy Course</h3>
+    <p>Course ID: {{ coursePrice.topic}}</p>
+    <p>Price: {{ coursePrice.price.price | currency: 'INR' }}</p>
+    <button class="btn btn-success" [disabled]="isPurchased" (click)="buyCourse()">        {{ isPurchased ? 'Purchased' : 'Buy Now' }}
+    </button>
+  
+    <div *ngIf="message" class="alert alert-info mt-3">
+      {{ message }}
+      <div *ngIf="paymentDate">
+        Payment Date: {{ paymentDate | date:'medium' }}
+      </div>
+      <div>
+        Amount payed:{{ totalprice | currency:'INR' }}
+      </div>
+      
+    </div>
+  </div>
+  

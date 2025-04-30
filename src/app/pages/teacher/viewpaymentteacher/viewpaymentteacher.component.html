@@ -5,18 +5,18 @@
         <tr>
           <th>User Name</th>
           <th>Course Name</th>
-          <th>Amount Paid ($)</th>
+          <th>Amount paid </th>
           <th>Payment Date</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let payment of paymentData">
-          <td>{{ payment.userName }}</td>
-          <td>{{ payment.courseName }}</td>
-          <td>{{ payment.amountPaid | currency : 'INR'}}</td>
-          <td>{{ payment.paymentDate }}</td>
+          <td>{{ payment.userId.username }}</td>
+          <td>{{ payment.courseId.topic }}</td>
+          <td>{{ payment.teacherAmount | currency : 'INR'}}</td>
+          <td>{{ payment.paymentDate | date:'medium'}}</td>
         </tr>
       </tbody>
     </table>
   </div>
-  
+   

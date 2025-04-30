@@ -1,0 +1,81 @@
+<!-- <div class="assignment-form">
+    <h2>Submit Assignment Answer</h2>
+  
+  <div  class="assignment-question">
+    <h5>Assignment Question:</h5>
+    <p>{{ assignmentDetails.question }}</p>
+</div>
+
+<div *ngIf="assignmentDetails.teacherAnswer" class="teacher-answer">
+  <h5>Teacher's Answer:</h5>
+  <p>{{ assignmentDetails.teacherAnswer }}</p>
+</div>
+
+      <textarea [(ngModel)]="textAnswer" placeholder="Your answer..." class="textarea"></textarea>
+    <input type="file" (change)="onFileChange($event)" class="file-input" />
+  
+    <button (click)="submitAnswer()">Submit Answer</button>
+  
+    <p *ngIf="successMessage" class="success-msg">{{ successMessage }}</p>
+    <p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
+  </div>
+  
+  <hr> 
+  
+  <div class="answers-list" *ngIf="submittedAnswers.length > 0">
+    <h3>My Submitted Answers</h3>
+    <div *ngFor="let ans of submittedAnswers" class="answer-box">
+      <p><strong>Name:</strong> {{ ans.studentName }}</p>
+      <p><strong>Text:</strong> {{ ans.textAnswer }}</p>
+      <div *ngIf="ans.fileUrl">
+        <a [href]="'http://localhost:3000/uploads/' + ans.fileUrl" target="_blank">📎 View Uploaded File</a>
+      </div>
+    </div>
+  </div>
+   -->
+
+
+   <div class="assignment-form">
+    <h2>Submit Assignment Answer</h2>
+  
+    <div class="assignment-question">
+      <h5>Assignment Question:</h5>
+      <p>{{ assignmentDetails.question }}</p>
+    </div>
+  
+    <!-- Answer textarea (readonly if submitted) -->
+    <textarea
+      [(ngModel)]="textAnswer"
+      [readonly]="hasSubmitted"
+      placeholder="Your answer..."
+      class="textarea"
+    ></textarea>
+  
+    <!-- File Upload -->
+    <div *ngIf="!hasSubmitted">
+      <input type="file" (change)="onFileChange($event)" class="file-input" />
+    </div>
+    <div *ngIf="hasSubmitted && submittedAnswers[0]?.fileUrl">
+      📎 You submitted a file:
+      <a
+        [href]="'http://localhost:3000/uploads/' + submittedAnswers[0].fileUrl"
+        target="_blank"
+        >View File</a
+      >
+    </div>
+  
+    <!-- Submit Button -->
+    <button (click)="submitAnswer()" [disabled]="hasSubmitted">Submit Answer</button>
+  
+    <p *ngIf="successMessage" class="success-msg">{{ successMessage }}</p>
+    <p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
+  </div>
+  
+  <hr />
+  
+  <!-- ✅ Teacher's Answer (ONLY after student has submitted) -->
+  <div *ngIf="hasSubmitted && assignmentDetails.teacherAnswer" class="teacher-answer">
+    <h3>Teacher's Answer</h3>
+    <p>{{ assignmentDetails.teacherAnswer }}</p>
+  </div>
+  

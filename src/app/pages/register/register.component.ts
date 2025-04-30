@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component,Input,OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MainService } from '../../service/main.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   showModal = false; // Ensure this is controlled properly
   isSubmitted = false;
+  
+  isVisible: boolean = false;
 
   constructor(private fb: FormBuilder, private mainService: MainService) {} 
 
@@ -34,6 +37,14 @@ export class RegisterComponent implements OnInit {
   //     }
   //   }
   // }
+
+  open(): void {
+    this.isVisible = true; // Show the modal
+  }
+
+  close(): void {
+    this.isVisible = false; // Hide the modal
+  }
 
   initForm() {
     this.registerForm = this.fb.group({
@@ -60,18 +71,48 @@ export class RegisterComponent implements OnInit {
   // }
 
 
-  onsave(){
+  // onsave(){
+  //   this.isSubmitted = true;
+  //   if (this.registerForm.valid) {
+  //     this.mainService.registerpost(this.registerForm.value).subscribe((res:any)=>{
+  //       console.log(res);
+  //       alert('Registration Successful');
+  //       this.closeRegisterModel();
+  //     });
+  //   } else {
+  //     console.log('Form Invalid:', this.registerForm.errors);
+  //   }
+  // }
+  onsave() {
     this.isSubmitted = true;
     if (this.registerForm.valid) {
-      this.mainService.registerpost(this.registerForm.value).subscribe((res:any)=>{
-        console.log(res);
-        alert('Registration Successful');
-        this.closeRegisterModel();
-      });
+      this.mainService.registerpost(this.registerForm.value).subscribe(
+        (res: any) => {
+          console.log(res);
+          alert('Registration Successful');
+          this.closeRegisterModel();
+        },
+        (err: HttpErrorResponse) => {
+          console.error('Error occurred during registration', err);
+  
+          // Check for email already exists error (specific to your backend response)
+          if (err.error && err.error.message === 'Email already exists') {
+            alert('This email is already registered. Please use a different email.');
+          } 
+          else if (err.error && err.error.message === 'Contact number already exists') {
+            alert('This contact is already registered. Please use a different contact.');
+          } 
+          else {
+            alert('An error occurred. Please try again.');
+          }
+        }
+      );
     } else {
       console.log('Form Invalid:', this.registerForm.errors);
     }
   }
+  
+  
 
   closeRegisterModel() {
     this.showModal = false;

@@ -17,12 +17,12 @@ import { TeachermonthlyreportComponent } from "../teachermonthlyreport/teachermo
 export class DemoComponent {
   hide=""
 
-  showViewProfile = true; // Default profile is shown initially
+  showViewProfile = false; // Default profile is shown initially
   showTeacherProfile = false;
   showDescription=false
   accountdetails=false
   report=false
-  course=false
+  course=true
   
   constructor(private router:Router){}
 

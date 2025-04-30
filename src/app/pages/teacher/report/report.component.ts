@@ -1,55 +1,78 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { MainService } from '../../../service/main.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-report',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './report.component.html',
   styleUrl: './report.component.css'
 })
 export class ReportComponent {
-  // courses = [
-  //   {
-  //     title: 'Web Development',
-  //     learners: 120,
-  //     rating: 4, // Rating out of 5
-  //     reviews: 250,
-  //     cashGenerated: 5400
-  //   },
-  //   {
-  //     title: 'JavaScript Basics',
-  //     learners: 200,
-  //     rating: 5,
-  //     reviews: 400,
-  //     cashGenerated: 8200
-  //   },
-  //   {
-  //     title: 'Python for Beginners',
-  //     learners: 150,
-  //     rating: 3, // Rating out of 5
-  //     reviews: 300,
-  //     cashGenerated: 7500
-  //   }
-  // ];
+
+  // teacherId = ''; // Replace with actual logged-in teacher ID
+  // selectedYear = new Date().getFullYear();
+  // years: number[] = [];
+
+  // report: any[] = [];
+  // loading = false;
+
+  // constructor(private reportService: MainService) {}
+
+  // ngOnInit(): void {
+  //   this.teacherId = localStorage.getItem('loginId') || ''; // Get the teacher ID from local storage or any other source
+  //   const currentYear = new Date().getFullYear();
+  //   this.years = Array.from({ length: 5 }, (_, i) => currentYear - i);
+  //   this.fetchReport();
+  // }
+
+  // fetchReport(): void {
+  //   this.loading = true;
+  //   this.reportService.viewmonthlyreport(this.teacherId, this.selectedYear).subscribe({
+  //     next: (data:any) => {
+  //       this.report = data;
+  //       this.loading = false;
+  //     },
+  //     error: (err: any) => {
+  //       console.error(err);
+  //       this.loading = false;
+  //     }
+  //   });
+  // }
 
 
-  courses = [
-    {
-      title: 'Angular Basics',
-      months: [
-        { month: 'January', learners: 120, rating: 4, reviews: 85, cashGenerated: 50000 },
-        { month: 'February', learners: 130, rating: 5, reviews: 95, cashGenerated: 55000 },
-        { month: 'March', learners: 140, rating: 4, reviews: 110, cashGenerated: 60000 }
-      ]
-    },
-    {
-      title: 'React Fundamentals',
-      months: [
-        { month: 'January', learners: 100, rating: 3, reviews: 60, cashGenerated: 40000 },
-        { month: 'February', learners: 105, rating: 4, reviews: 70, cashGenerated: 42000 },
-        { month: 'March', learners: 115, rating: 4, reviews: 80, cashGenerated: 46000 }
-      ]
-    }
-  ];
+  teacherId = ''; // Replace dynamically if needed
+  selectedYear = new Date().getFullYear();
+  years: number[] = [];
+  report: any[] = [];
+  loading = false;
+
+  constructor(private reportService: MainService) {}
+
+  ngOnInit(): void {
+    this.teacherId = localStorage.getItem('loginId') || ''; // Get the teacher ID from local storage or any other source
+    const currentYear = new Date().getFullYear();
+    this.years = Array.from({ length: 5 }, (_, i) => currentYear - i);
+    this.fetchReport();
+  }
+
+  fetchReport(): void {
+    this.loading = true;
+    this.reportService.viewmonthlyreport(this.teacherId, this.selectedYear).subscribe({
+      next: (data:any) => {
+        this.report = data;
+        this.loading = false;
+      },
+      error: (err:any) => {
+        console.error(err);
+        this.loading = false;
+      }
+    });
+  }
+
+  getMonthName(monthNumber: number): string {
+    return new Date(0, monthNumber - 1).toLocaleString('default', { month: 'long' });
+  }
 }

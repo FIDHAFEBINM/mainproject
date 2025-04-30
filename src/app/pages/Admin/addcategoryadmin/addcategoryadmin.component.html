@@ -11,20 +11,106 @@
     <div class="mb-3">
       <select class="form-select" [(ngModel)]="selectedCategory">
         <option value="" disabled selected>Select Category</option>
-        <option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</option>
+        <option *ngFor="let cat of categories" [value]="cat._id">{{ cat.categoryName }}</option>
       </select>
       <input type="text" class="form-control mt-2" [(ngModel)]="newSubcategory" placeholder="Enter new subcategory">
       <button class="btn btn-success mt-2" (click)="addSubcategory()">Add Subcategory</button>
     </div>
+    </div>
   
-    <!-- Display Categories & Subcategories -->
-    <div class="card mt-4" *ngFor="let category of categories">
-      <div class="card-body">
-        <h5 class="card-title">{{ category.name }}</h5>
-        <ul>
-          <li *ngFor="let sub of category.subcategories">{{ sub }}</li>
-        </ul>
+    <!-- <div class="categories-section mt-5">
+      <h4>Categories & Subcategories</h4>
+      <div class="card mt-3" *ngFor="let cat of categories">
+        <div class="card-body">
+          <h5 class="card-title">{{ cat.categoryName }}</h5>
+          <ul class="ms-3" *ngIf="subcategories[cat._id]?.length > 0; else noSub">
+            <li *ngFor="let sub of subcategories[cat._id]">
+              {{ sub.subcategory }}
+            </li>
+          </ul>
+          <ng-template #noSub>
+            <p class="text-muted">No subcategories available.</p>
+          </ng-template>
+        </div>
+      </div>
+    </div> -->
+
+
+
+    <!-- <div class="categories-section mt-5">
+      <h4>Categories & Subcategories</h4>
+      <div class="card mt-3" *ngFor="let cat of categories">
+        <div class="card-body">
+          <div *ngIf="editingCategoryId === cat._id; else viewMode">
+            <input type="text" class="form-control" [(ngModel)]="cat.categoryName" />
+            <button class="btn btn-success btn-sm mt-2" (click)="updateCategory(cat)">Save</button>
+            <button class="btn btn-secondary btn-sm mt-2" (click)="cancelEdit()">Cancel</button>
+          </div>
+          <ng-template #viewMode>
+            <h5 class="card-title">{{ cat.categoryName }}</h5>
+            <button class="btn btn-primary btn-sm" (click)="editCategory(cat._id)">Edit</button>
+          </ng-template>
+    
+          <ul class="ms-3" *ngIf="subcategories[cat._id]?.length > 0; else noSub">
+            <li *ngFor="let sub of subcategories[cat._id]">
+              {{ sub.subcategory }}
+            </li>
+          </ul>
+          <ng-template #noSub>
+            <p class="text-muted ms-3">No subcategories available.</p>
+          </ng-template>
+        </div>
+      </div>
+    </div> -->
+
+
+    <div class="categories-section mt-5">
+      <h4>Categories & Subcategories</h4>
+      <div class="card mt-3" *ngFor="let cat of categories">
+        <div class="card-body">
+          <!-- Editable Category Name -->
+          <div *ngIf="editingCategoryId === cat._id; else viewMode">
+            <input type="text" class="form-control" [(ngModel)]="cat.categoryName" />
+            <button class="btn btn-success btn-sm mt-2" (click)="updateCategory(cat)">Save</button>
+            <button class="btn btn-secondary btn-sm mt-2" (click)="cancelEdit()">Cancel</button>
+          </div>
+          <ng-template #viewMode>
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="card-title mb-0">{{ cat.categoryName }}</h5>
+              <div>
+                <button class="btn btn-link p-0 ms-2" (click)="editCategory(cat._id)" title="Edit">
+                  <i class="fa fa-pencil-square"></i> <!-- Font Awesome Icon -->
+                </button>
+                <!-- <button class="btn btn-link text-danger p-0 ms-2" (click)="deleteCategory(cat._id)" title="Delete">
+                  <i class="fa fa-trash"></i> 
+                </button> -->
+              </div>
+            </div>
+          </ng-template>
+    
+          <!-- Subcategories -->
+          <ul class="ms-3">
+            <li *ngFor="let sub of subcategories[cat._id]">
+              <div class="d-flex justify-content-between align-items-center">
+                <span *ngIf="editingSubcategoryId !== sub._id">{{ sub.subcategory }}</span>
+                <input *ngIf="editingSubcategoryId === sub._id" type="text" class="form-control" [(ngModel)]="sub.subcategory" />
+                <div>
+                  <button *ngIf="editingSubcategoryId !== sub._id" class="btn btn-link p-0 ms-2" (click)="editSubcategory(sub._id)" title="Edit">
+                    <i class="fa fa-pencil-square"></i> <!-- Font Awesome Icon -->
+                  </button>
+                  <button *ngIf="editingSubcategoryId === sub._id" class="btn btn-success btn-sm ms-2" (click)="updateSubcategory(sub)">Save</button>
+                  <button *ngIf="editingSubcategoryId === sub._id" class="btn btn-secondary btn-sm ms-2" (click)="cancelEditSubcategory()">Cancel</button>
+                  <!-- <button class="btn btn-link text-danger p-0 ms-2" (click)="deleteSubcategory(sub._id)" title="Delete">
+                    <i class="fa fa-trash"></i> 
+                  </button> -->
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ng-template #noSub>
+            <p class="text-muted ms-3">No subcategories available.</p>
+          </ng-template>
+        </div>
       </div>
     </div>
-  </div>
   

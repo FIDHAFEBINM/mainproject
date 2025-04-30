@@ -33,6 +33,11 @@ import { TeachermonthlyreportComponent } from './pages/teacher/teachermonthlyrep
 import { AddcategoryadminComponent } from './pages/Admin/addcategoryadmin/addcategoryadmin.component';
 import { UploadassignmentComponent } from './pages/website/uploadassignment/uploadassignment.component';
 import { ViewpaymentteacherComponent } from './pages/teacher/viewpaymentteacher/viewpaymentteacher.component';
+import { AddpricingComponent } from './pages/Admin/addpricing/addpricing.component';
+import { BuycourseComponent } from './pages/website/buycourse/buycourse.component';
+import { AdminreportComponent } from './pages/Admin/adminreport/adminreport.component';
+import { ViewpurchasedcoursesComponent } from './pages/website/viewpurchasedcourses/viewpurchasedcourses.component';
+import { TeacherviewreviewComponent } from './pages/teacher/teacherviewreview/teacherviewreview.component';
 
 export const routes: Routes = [
     {
@@ -76,8 +81,12 @@ export const routes: Routes = [
                 path:'allcourse',
                 component:AllcourseComponent
             },
+            { 
+                path: 'buy-course/:courseId', 
+                component: BuycourseComponent },
+
             {
-                path:'video',
+                path:'video/:sectionId',
                 component:VideoComponent
             },
         
@@ -100,6 +109,10 @@ export const routes: Routes = [
             {
                 path:'assignmentupdate',
                 component:UploadassignmentComponent
+            },
+            {
+                path:'purchasedcourses',
+                component:ViewpurchasedcoursesComponent
             }
          
           
@@ -152,6 +165,10 @@ export const routes: Routes = [
             {
                 path:'viewpayment',
                 component:ViewpaymentteacherComponent
+            },
+            {
+                path:'teacherviewreview',
+                component:TeacherviewreviewComponent
             }
          
          
@@ -184,7 +201,7 @@ export const routes: Routes = [
                 component:ViewteachercourseadminComponent
             },
             {
-                path:'adminviewcourses-details',
+                path:'adminviewcourses-details/:id',
                 component:ViewcoursesComponent
             },
             {
@@ -193,11 +210,15 @@ export const routes: Routes = [
             },
             {
                 path:'adminreports',
-                component:AdminreportsComponent
+                component:AdminreportComponent
             },
             {
                 path:'addcategory',
                 component:AddcategoryadminComponent
+            },
+            {
+                path:'addprice',
+                component:AddpricingComponent
             }
         ]
     }

@@ -6,7 +6,7 @@
                     {{ review.user.username }}
                 </div>
                 <div class="card-body text-center">
-                    <!-- Dynamic Star Rating -->
+                    <!-- Dynamic Star Rating --> 
                     <div>
                         <i *ngFor="let star of getFullStars(review.rating)" class="fa fa-star text-warning"></i>
                         <i *ngIf="hasHalfStar(review.rating)" class="fa fa-star-half-alt text-warning"></i>

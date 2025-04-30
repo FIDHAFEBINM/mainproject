@@ -139,3 +139,12 @@
   .navbar .actions button.language i {
     height: 16px;
   }
+  .page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .content-wrap {
+    flex: 1; /* This pushes the footer down */
+  }

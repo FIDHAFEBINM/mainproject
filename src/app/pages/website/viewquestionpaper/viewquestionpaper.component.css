@@ -2,9 +2,10 @@
 .question-paper-container {
   display: flex;
   justify-content: center;
+  flex-direction: column;  /* Added this line for vertical alignment */
   padding: 30px;
   background-color: #f8f8f8;
-  min-height: 100vh;
+  min-height: auto;
 }
 
 /* Paper-like container for the quiz */
@@ -12,7 +13,8 @@
   background-color: #ffffff;
   padding: 25px;
   border-radius: 8px;
-  width: 120vh;
+  width: 80%;  /* Adjusted width to fit better */
+  max-width: 900px; /* Ensures a maximum width for larger screens */
   font-family: Arial, sans-serif;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid #ddd;
@@ -112,6 +114,7 @@
 .submit-button:active {
   background-color: #004085;
 }
+
 .marks-display {
   margin-top: 20px;
   font-size: 18px;
@@ -119,6 +122,7 @@
   color: #28a745;
   text-align: center;
 }
+
 .correct {
   color: green;
   font-weight: bold;

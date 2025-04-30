@@ -12,7 +12,5 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
   styleUrl: './pdf-viewer.component.css'
 })
 export class PdfViewerComponent {
-
-
-
+  
 }

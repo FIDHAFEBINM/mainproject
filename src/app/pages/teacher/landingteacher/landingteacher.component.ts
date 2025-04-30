@@ -24,14 +24,15 @@ export class LandingteacherComponent {
   
 
   constructor(private route:Router){}
-  // onstart(){
-  //   if(this.registerModel){
-  //     this.registerModel.showModal=true 
-  //   }
-  // }
-
   onstart(){
-    this.route.navigate(['/teacher/registeredteacher'])
+    if(this.registerModel){
+      this.registerModel.showModal=true 
+    }
   }
+
+  // onstart(){
+    
+  //   this.route.navigate(['/teacher/registeredteacher'])
+  // }
 
 }

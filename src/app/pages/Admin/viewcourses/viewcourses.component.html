@@ -4,20 +4,22 @@
   <div class="card mb-3" *ngFor="let course of teacherCourses">
       <div class="row g-0">
           <div class="col-md-4">
-              <img [src]="course.image" class="img-fluid rounded-start" alt="Course Image">
+              <img [src]="'http://localhost:3000/uploads/'+course.previewimage" class="img-fluid rounded-start" alt="Course Image" style="height: 200px;width:200px">
           </div>
           <div class="col-md-8">
               <div class="card-body">
-                  <h5 class="card-title">{{ course.title }}</h5>
-                  <p class="card-text">{{ course.description }}</p>
-                  <p><strong>Duration:</strong> {{ course.duration }}</p>
+                  <h5 class="card-title">{{ course.topic }}</h5>
+                  <p class="card-text">{{ course.subcategory.subcategory }},{{course.subcategory.category.categoryName}}</p>
+                  <p><strong></strong> {{ course.price.price | currency:"INR" }}
+
                   
                   <!-- Star Rating -->
-                  <p><strong>Rating:</strong> 
-                      <span *ngFor="let star of getStars(course.rating)" class="star">&#9733;</span>
-                      <span *ngFor="let star of getEmptyStars(course.rating)" class="star-empty">&#9734;</span>
-                  </p>
-              </div>
+                  <!-- <p><strong>Average Rating:</strong> 
+                    <span *ngFor="let star of getStars(course.averageRating)" class="star">&#9733;</span>
+                    <span *ngFor="let star of getEmptyStars(course.averageRating)" class="star-empty">&#9734;</span>
+                    ({{ course.averageRating.toFixed(1) }} / 5)
+                  </p> -->
+              </div> 
           </div>
       </div>
   </div>

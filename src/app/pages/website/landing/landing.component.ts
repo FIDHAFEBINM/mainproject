@@ -58,6 +58,10 @@ export class LandingComponent {
     }
   }
 
+  goOrders(){
+    this.router.navigate(['purchasedcourses'])
+  }
+
 
   openRegisterModel(){
     if(this.registerModel){

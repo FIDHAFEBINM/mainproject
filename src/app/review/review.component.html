@@ -1,20 +1,17 @@
-<div class="container">
+<!-- <div class="container">
   <div class="cards">
     <div class="card-bodys">
 
-      <!-- Always show rating -->
       <div class="mb-3" (click)="submitReview()">
         <span *ngFor="let star of stars; let i = index" (click)="rate(i + 1)" class="star">
-          <i class="fa" [ngClass]="i < rating ? 'highlighted' : ''">&#9733;</i> <!-- Unicode star symbol -->
+          <i class="fa" [ngClass]="i < rating ? 'highlighted' : ''">&#9733;</i> 
         </span>
       </div>
 
-      <!-- <p class="text-muted">You rated: <strong>{{ rating }} / 5</strong></p> -->
+      <p class="text-muted">You rated: <strong>{{ rating }} / 5</strong></p>
 
-      <!-- Link to show review form -->
       <div class="a" (click)="toggleReviewForm()" *ngIf="!showReviewForm">Give Review</div>
 
-      <!-- Review form (hidden by default) -->
       <div [ngClass]="showReviewForm ? 'review-form-visible' : 'review-form-hidden'">
         <div class="modal-backdrop" [ngClass]="{ 'show': showReviewForm }">
           <div class="modal-content">
@@ -24,8 +21,49 @@
               <textarea [(ngModel)]="review" rows="3" placeholder="Write your review..."></textarea>
             </div>
             <button (click)="submitReview()">Submit Review</button>
-          </div>
+          </div> 
         </div>
     </div>
   </div>
+</div> -->
+
+<div class="container">
+  <div class="cards">
+    <div class="card-bodys">
+      <!-- Always show rating stars; if an existing review exists, ensure the stars are already highlighted -->
+      <div class="mb-3">
+        <span *ngFor="let star of stars; let i = index" (click)="rate(i + 1) "  class="star" >
+          <i class="fa" [ngClass]="i < rating ? 'highlighted' : ''">&#9733;</i>
+        </span>
+      </div>
+
+      <!-- If a review has been submitted, show the review details -->
+      <div *ngIf="reviewSubmitted">
+        <!-- <p class="text-muted">Your Rating: <strong>{{ rating }} / 5</strong></p> -->
+        <p class="review-text">{{ review }}</p>
+        <div (click)="toggleReviewForm()">Edit Review</div>
+      </div>
+
+      <!-- If no review submitted yet, allow user to start a new review -->
+      <div *ngIf="!reviewSubmitted">
+        <div class="a" (click)="toggleReviewForm()">Give Review</div>
+      </div>
+
+      <!-- Review Modal / Form -->
+      <div [ngClass]="showReviewForm ? 'review-form-visible' : 'review-form-hidden'">
+        <div class="modal-backdrop" [ngClass]="{ 'show': showReviewForm }">
+          <div class="modal-content">
+            <button class="close-button" (click)="toggleReviewForm()">×</button>
+            <h4>{{ reviewSubmitted ? 'Edit Your Review' : 'Write Your Review' }}</h4>
+            <div class="mb-3">
+              <textarea [(ngModel)]="review" rows="3" placeholder="Write your review..."></textarea>
+            </div>
+            <button (click)="submitReview()">Submit Review</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
+

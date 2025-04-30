@@ -1,4 +1,4 @@
-<!-- <div class="container" style="padding-top: 30px;">
+ <!-- <div class="container" style="padding-top: 30px;">
     <h3 class="headings">Course Overview</h3>
     <table class="table">
       <thead>
@@ -29,7 +29,7 @@
    -->
 
 
-
+<!-- 
    <div class="container" style="padding-top: 30px;">
     <h3 class="headings">Course Overview</h3>
     <table class="table">
@@ -47,17 +47,13 @@
         <ng-container *ngFor="let course of courses">
           <ng-container *ngFor="let monthData of course.months">
             <tr>
-              <!-- Show the title only for the first month -->
               <td *ngIf="monthData === course.months[0]">{{ course.title }}</td>
-              <td *ngIf="monthData !== course.months[0]"></td> <!-- Empty cell for other months -->
+              <td *ngIf="monthData !== course.months[0]"></td> 
   
-              <!-- Month Name -->
               <td>{{ monthData.month }}</td>
   
-              <!-- Number of Learners -->
               <td>{{ monthData.learners }}</td>
-  
-              <!-- Rating -->
+  z
               <td>
                 <div class="rating">
                   <span *ngFor="let star of [].constructor(monthData.rating); let i = index" class="star">★</span>
@@ -65,10 +61,8 @@
                 </div>
               </td>
   
-              <!-- Reviews -->
               <td>{{ monthData.reviews }} reviews</td>
   
-              <!-- Cash Generated -->
               <td>{{ monthData.cashGenerated | currency: 'INR' }}</td>
             </tr>
           </ng-container>
@@ -76,4 +70,87 @@
       </tbody>
     </table>
   </div>
-  
+   --> 
+
+
+  <!-- src/app/components/teacher-report/teacher-report.component.html -->
+<!-- <div class="container mt-4">
+  <h3 class="mb-3">Monthly Report - {{ selectedYear }}</h3>
+
+  <div class="form-group mb-4">
+    <label>Select Year:</label>
+    <select class="form-control w-auto d-inline ms-2" [(ngModel)]="selectedYear" (change)="fetchReport()">
+      <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+    </select>
+  </div>
+
+  <div *ngIf="loading">Loading...</div>
+
+  <table class="table table-bordered" *ngIf="!loading && report.length">
+    <thead class="table-dark">
+      <tr>
+        <th>Month</th>
+        <th>Earnings (₹)</th>
+        <th>User Count</th>
+        
+        <th>Courses Sold</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of report">
+        <td>{{ r.month }}</td>
+        <td>{{ r.totalEarnings }}</td>
+        <td>{{ r.userCount }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let course of r.coursesSold">{{ course.topic }}</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && report.length === 0" class="text-muted">No data available for this year.</div>
+</div> -->
+
+
+<!-- src/app/components/teacher-report/teacher-report.component.html -->
+<div class="container mt-4">
+  <h3 class="mb-3">Monthly Course Sales Report - {{ selectedYear }}</h3>
+
+  <div class="form-group mb-4">
+    <label>Select Year:</label>
+    <select class="form-control w-auto d-inline ms-2" [(ngModel)]="selectedYear" (change)="fetchReport()">
+      <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+    </select>
+  </div>
+
+  <div *ngIf="loading" class="text-primary">Loading...</div>
+
+  <table class="table table-bordered" *ngIf="!loading && report.length">
+    <thead class="table-dark">
+      <tr>
+        <th>Month</th>
+        <th>Total Earnings (₹)</th>
+        <th>Courses Sold</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let monthReport of report">
+        <td>{{ getMonthName(monthReport.month) }}</td>
+        <td>₹{{ monthReport.totalEarnings }}</td>
+        <td>
+          <ul class="mb-0">
+            <li *ngFor="let course of monthReport.courses">
+              <strong>{{ course.name }}</strong>: {{ course.sold }} sold (₹{{ course.earnings }})
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && report.length === 0" class="text-muted">
+    No data available for {{ selectedYear }}.
+  </div>
+</div>

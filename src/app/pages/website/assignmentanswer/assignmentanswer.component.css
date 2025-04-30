@@ -1,0 +1,57 @@
+.assignment-form {
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  }
+  
+  .input,
+  .textarea,
+  .file-input {
+    display: block;
+    width: 100%;
+    margin: 10px 0 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .success-msg {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .error-msg {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .answers-list {
+    max-width: 600px;
+    margin: 30px auto;
+  }
+  
+  .answer-box {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+  }
+  

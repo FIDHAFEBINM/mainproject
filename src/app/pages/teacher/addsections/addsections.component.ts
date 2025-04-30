@@ -86,13 +86,16 @@ export class AddsectionsComponent {
 
 
   courses: any[] = [];
-  sections: any[] = [];  // Only show sections for the selected course
-  sectionsByCourse: any[] = [];
+  sections: any[] = [];
   selectedCourseId: string = '';
   activeSectionId: string | null = null;
-  activeTab: string | null = null; // 'questionPaper' or 'assignment'
-  
+  activeTab: string | null = null;
+  isEditing: boolean = false; // To check if we are in edit mode
+  sectionsByCourse: any[] = [];
+ 
+
   newSection = {
+    _id: '', // Add _id for updating a section
     name: '',
     videoTitle: '',
     pdfTitle: '',
@@ -107,14 +110,12 @@ export class AddsectionsComponent {
     this.loadSections();
   }
 
-  // Load courses
   loadCourses(): void {
     this.sectionService.viewCourse().subscribe((data: any) => {
       this.courses = data;
     });
   }
 
-  // Load sections
   loadSections(): void {
     this.sectionService.getSections().subscribe((data: any) => {
       // Add toggle flag for section expansion
@@ -127,11 +128,9 @@ export class AddsectionsComponent {
 
   toggleSection(section: any, tab: string) {
     if (this.activeSectionId === section._id && this.activeTab === tab) {
-      // If clicking the same tab, close it
       this.activeSectionId = null;
       this.activeTab = null;
     } else {
-      // Open the clicked tab
       this.activeSectionId = section._id;
       this.activeTab = tab;
     }
@@ -140,15 +139,13 @@ export class AddsectionsComponent {
   loadSectionsByCourse(): void {
     if (this.selectedCourseId) {
       this.sectionService.sectionbycourseid(this.selectedCourseId).subscribe((data: any) => {
-        this.sections = data 
+        this.sections = data;
       });
     } else {
       this.sections = [];
     }
-    console.log("sections",this.sections);
   }
 
-  // Handle file selection
   onFileChange(event: any, type: 'video' | 'pdf'): void {
     if (type === 'video') {
       this.newSection.videoFile = event.target.files[0];
@@ -157,8 +154,8 @@ export class AddsectionsComponent {
     }
   }
 
-  // Create a new section
-  createSection(): void {
+  // Add or Update section
+  createOrUpdateSection(): void {
     if (!this.selectedCourseId) {
       alert('Please select a course');
       return;
@@ -177,10 +174,37 @@ export class AddsectionsComponent {
       formData.append('pdf', this.newSection.pdfFile);
     }
 
-    this.sectionService.createSection(formData).subscribe(() => {
-      this.loadSections();
-      this.resetForm();
-    });
+    if (this.isEditing) {
+      // Update section
+      this.sectionService.editsection(formData, this.newSection._id).subscribe(() => {
+        this.loadSections();
+        this.resetForm();
+      });
+    } else {
+      // Create new section
+      this.sectionService.createSection(formData).subscribe(() => {
+        alert('Section created successfully!');
+        this.loadSections();
+        this.resetForm();
+      });
+    }
+  }
+
+  // Set section for editing
+  editSection(section: any): void {
+    this.isEditing = true;
+  
+    // Pre-fill form with section data including videoTitle and pdfTitle
+    this.newSection = {
+      _id: section._id, // Ensure section ID is passed for updates
+      name: section.name,
+      videoTitle: section.videoTitle || '',  // Default to empty string if undefined
+      pdfTitle: section.pdfTitle || '',  // Default to empty string if undefined
+      videoFile: null,  // Optionally clear video file
+      pdfFile: null,  // Optionally clear pdf file
+    };
+  
+    console.log('Section being edited:', this.newSection);  // Debugging line
   }
 
   // Delete section
@@ -190,19 +214,10 @@ export class AddsectionsComponent {
     });
   }
 
-  // Toggle add-section form visibility
-  toggleAddSection(courseId: string): void {
-    this.sectionsByCourse = this.sectionsByCourse.map((course) => {
-      if (course._id === courseId) {
-        course.showAddSection = !course.showAddSection;
-      }
-      return course;
-    });
-  }
-
-  // Reset form
   resetForm(): void {
+    this.isEditing = false;
     this.newSection = {
+      _id: '',
       name: '',
       videoTitle: '',
       pdfTitle: '',

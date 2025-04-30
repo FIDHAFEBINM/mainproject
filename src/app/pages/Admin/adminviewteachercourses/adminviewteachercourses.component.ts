@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { MainService } from '../../../service/main.service';
 
 @Component({
   selector: 'app-adminviewteachercourses',
@@ -9,16 +10,23 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
   templateUrl: './adminviewteachercourses.component.html',
   styleUrl: './adminviewteachercourses.component.css'
 })
-export class AdminviewteachercoursesComponent {
-  teachers = [
-    { id: 1, name: 'John Doe', email: 'johndoe@example.com', expertise: 'Mathematics', profileImage: 'image/doc.jpg' },
-    { id: 2, name: 'Jane Smith', email: 'janesmith@example.com', expertise: 'Physics', profileImage: 'image/doc.jpg' },
-    { id: 3, name: 'Robert Brown', email: 'robertbrown@example.com', expertise: 'Chemistry', profileImage: 'image/doc.jpg' }
-  ];
+export class AdminviewteachercoursesComponent implements OnInit{
+  teachers:any = [];
 
-  constructor(private router: Router,private route: ActivatedRoute) {}
+  constructor(private router: Router,private route: ActivatedRoute,private mainserve:MainService) {}
 
-  viewCourses() {
-    this.router.navigate(['/admin/adminviewcourses-details']);
+  ngOnInit(): void {
+      this.loadteacher() 
   }
+
+  viewCourses(teacherId:string) {
+    this.router.navigate(['/admin/adminviewcourses-details',teacherId]);
+  }
+
+  loadteacher() {
+    this.mainserve.loginget().subscribe((res: any) => {
+      this.teachers = res.filter((user: any) => user.role === 'teacher');
+    });
+  }
+
 }

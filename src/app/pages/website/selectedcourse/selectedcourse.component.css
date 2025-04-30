@@ -87,4 +87,13 @@
     word-wrap: break-word; /* Ensure long words break to the next line */
     overflow-wrap: break-word;
   }
+  .lesson-video {
+    display: flex;
+    gap:10px;
+  }
+
+  .lesson-pdf {
+    display: flex;
+    gap:10px;
+  }
   

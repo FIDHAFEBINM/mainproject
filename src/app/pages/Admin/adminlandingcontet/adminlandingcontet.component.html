@@ -4,9 +4,9 @@
   
       <div class="section" id="dashboard">
         <h2>Dashboard Overview</h2>
-        <p>Total Users: {{ totalUsers }}</p>
-        <p>Total Teachers: {{ totalTeachers }}</p>
-        <p>Courses Available: {{ totalCourses }}</p>
+        <p>Total Users: {{ usersCount }}</p>
+        <p>Total Teachers: {{ teachersCount }}</p>
+        <p>Courses Available: {{ totalCourses }}</p> 
       </div>
   
       <div class="section" id="manage-courses">
@@ -18,6 +18,8 @@
         <h2>Manage Users</h2>
         <button (click)="viewAllUsers()">View All Users</button>
       </div>
+
+      
   
       <!-- Assignments Section
       <div class="section" id="assignments">

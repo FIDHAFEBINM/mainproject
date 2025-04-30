@@ -15,6 +15,7 @@ export class TeachernavfooterComponent {
     this.router.navigate(['/teacher/demo']) 
    }
    logout(){
+    localStorage.clear()
     this.router.navigate(['elearn'])
    }
 
